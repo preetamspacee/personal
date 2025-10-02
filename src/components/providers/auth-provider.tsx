@@ -110,13 +110,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }
 
   const signIn = async ({ email, password, role }: { email: string; password: string; role: 'admin' | 'customer' }) => {
-    try {
-      setLoading(true)
-      
-      // Check if Supabase is configured
-      if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
-        console.log('Supabase not configured, using mock authentication')
-        // Mock authentication for development
+    setLoading(true)
+    
+    // Check if Supabase is configured
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+      // Mock authentication for development - faster loading
+      setTimeout(() => {
         setUser({
           id: 'mock-user-id',
           email: email,
@@ -132,28 +131,25 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         } as AuthUser)
         toast.success('Successfully signed in! (Demo Mode)')
         setLoading(false)
-        return Promise.resolve()
-      }
-      
-      console.log('Attempting Supabase sign in with:', { email, role })
-      
+      }, 100) // Small delay to simulate loading
+      return
+    }
+    
+    try {
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
       })
 
       if (error) {
-        console.error('Supabase auth error:', error)
         toast.error(error.message || 'Invalid email or password')
         throw error
       }
 
       if (data.user) {
-        console.log('Supabase auth successful:', data.user.email)
-        
-        // Update user role if needed
+        // Update user role if needed - simplified
         if (role) {
-          await supabase
+          supabase
             .from('users')
             .update({ role })
             .eq('id', data.user.id)
@@ -163,7 +159,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         toast.success('Successfully signed in!')
       }
     } catch (error: any) {
-      console.error('Sign in error:', error)
       toast.error(error.message || 'Failed to sign in')
       throw error
     } finally {

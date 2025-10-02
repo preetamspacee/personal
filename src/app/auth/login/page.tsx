@@ -140,7 +140,17 @@ function LoginForm() {
               )}
 
               {/* Submit Button */}
-              <Button type="submit" className="w-full" disabled={isLoading}>
+              <Button 
+                type="submit" 
+                className="w-full" 
+                disabled={isLoading}
+                onClick={(e) => {
+                  // Prevent default and handle immediately for faster response
+                  if (!isLoading) {
+                    handleSubmit(e)
+                  }
+                }}
+              >
                 {isLoading ? 'Signing in...' : 'Sign In'}
               </Button>
             </form>
