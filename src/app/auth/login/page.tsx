@@ -14,7 +14,7 @@ import Link from 'next/link'
 function LoginForm() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const { signIn, loading } = useAuth()
+  const { signIn } = useAuth()
   
   const [formData, setFormData] = useState({
     email: '',
@@ -23,16 +23,20 @@ function LoginForm() {
   })
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
+    setIsLoading(true)
 
     try {
       await signIn(formData)
       router.push(`/${formData.role}/dashboard`)
     } catch (err: any) {
       setError(err.message || 'Login failed')
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -136,8 +140,8 @@ function LoginForm() {
               )}
 
               {/* Submit Button */}
-              <Button type="submit" className="w-full" disabled={loading}>
-                {loading ? 'Signing in...' : 'Sign In'}
+              <Button type="submit" className="w-full" disabled={isLoading}>
+                {isLoading ? 'Signing in...' : 'Sign In'}
               </Button>
             </form>
 

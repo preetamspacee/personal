@@ -13,21 +13,32 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // Mock user for frontend development
-    setUser({
-      id: 'mock-user-id',
-      email: 'demo@bsm-platform.com',
-      role: 'admin',
-      full_name: 'Demo User',
-      avatar_url: undefined,
-      is_verified: true,
-      last_login: new Date().toISOString(),
-      app_metadata: {},
-      user_metadata: {},
-      aud: 'authenticated',
-      created_at: new Date().toISOString(),
-    } as AuthUser)
-    setLoading(false)
+    // Check if Supabase is configured
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+      console.log('Supabase not configured, using mock authentication for development')
+      // Don't auto-login in mock mode, let user sign in manually
+      setUser(null)
+      setLoading(false)
+      return
+    }
+
+    console.log('Supabase configured, initializing auth state listener')
+    console.log('Supabase URL:', process.env.NEXT_PUBLIC_SUPABASE_URL)
+
+    // Initialize Supabase auth state listener
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        console.log('Auth state change:', event, session?.user?.email)
+        if (session?.user) {
+          await fetchUserProfile(session.user)
+        } else {
+          setUser(null)
+        }
+        setLoading(false)
+      }
+    )
+
+    return () => subscription.unsubscribe()
   }, [])
 
   const fetchUserProfile = async (authUser: User) => {
@@ -102,6 +113,28 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       setLoading(true)
       
+      // Check if Supabase is configured
+      if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+        console.log('Supabase not configured, using mock authentication')
+        // Mock authentication for development
+        setUser({
+          id: 'mock-user-id',
+          email: email,
+          role: role,
+          full_name: role === 'admin' ? 'Admin User' : 'Customer User',
+          avatar_url: undefined,
+          is_verified: true,
+          last_login: new Date().toISOString(),
+          app_metadata: {},
+          user_metadata: {},
+          aud: 'authenticated',
+          created_at: new Date().toISOString(),
+        } as AuthUser)
+        toast.success('Successfully signed in! (Demo Mode)')
+        setLoading(false)
+        return Promise.resolve()
+      }
+      
       console.log('Attempting Supabase sign in with:', { email, role })
       
       const { data, error } = await supabase.auth.signInWithPassword({
@@ -142,6 +175,28 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       setLoading(true)
       
+      // Check if Supabase is configured
+      if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+        console.log('Supabase not configured, using mock signup')
+        // Mock signup for development
+        setUser({
+          id: 'mock-user-id',
+          email: email,
+          role: role,
+          full_name: full_name,
+          avatar_url: undefined,
+          is_verified: true,
+          last_login: new Date().toISOString(),
+          app_metadata: {},
+          user_metadata: {},
+          aud: 'authenticated',
+          created_at: new Date().toISOString(),
+        } as AuthUser)
+        toast.success('Account created successfully! (Demo Mode)')
+        setLoading(false)
+        return
+      }
+      
       console.log('Attempting Supabase sign up with:', { email, full_name, role })
       
       const { data, error } = await supabase.auth.signUp({
@@ -177,6 +232,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const signOut = async () => {
     try {
       setLoading(true)
+      
+      // Check if Supabase is configured
+      if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+        console.log('Supabase not configured, using mock signout')
+        setUser(null)
+        toast.success('Successfully signed out! (Demo Mode)')
+        setLoading(false)
+        return
+      }
       
       const { error } = await supabase.auth.signOut()
       

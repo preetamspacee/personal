@@ -25,7 +25,7 @@ import { supabase } from '@/lib/supabase/client'
 
 export default function AdminDashboard() {
   const router = useRouter()
-  const { user, signOut } = useAuth()
+  const { user, signOut, loading: authLoading } = useAuth()
   const [stats, setStats] = useState({
     totalTickets: 0,
     openTickets: 0,
@@ -40,12 +40,24 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    // Check if Supabase is configured
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+      // In mock mode, allow access to admin dashboard
+      fetchDashboardData()
+      return
+    }
+    
+    // Wait for auth to finish loading
+    if (authLoading) {
+      return
+    }
+    
     if (!user || user.role !== 'admin') {
       router.push('/auth/login?role=admin')
       return
     }
     fetchDashboardData()
-  }, [user, router])
+  }, [user, router, authLoading])
 
   const fetchDashboardData = async () => {
     try {
@@ -101,7 +113,10 @@ export default function AdminDashboard() {
     router.push('/')
   }
 
-  if (loading) {
+  // Check if Supabase is configured
+  const isMockMode = !process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  
+  if (loading || (!isMockMode && authLoading)) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div>
@@ -190,6 +205,9 @@ export default function AdminDashboard() {
           </h2>
           <p className="text-muted-foreground">
             Here's what's happening with your BSM Platform today.
+            {(!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) && (
+              <span className="text-blue-500 ml-2">(Demo Mode)</span>
+            )}
           </p>
         </div>
 

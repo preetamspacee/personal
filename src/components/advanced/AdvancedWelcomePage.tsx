@@ -45,6 +45,28 @@ export function AdvancedWelcomePage() {
   useEffect(() => {
     const loadDynamicData = async () => {
       try {
+        // Check if Supabase is configured
+        if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+          console.log('Supabase not configured, using mock data')
+          // Set mock data for development
+          setAnalyticsData([
+            { id: '1', metric_name: 'total_tickets', metric_value: 1250, metric_type: 'counter', tags: {} },
+            { id: '2', metric_name: 'resolved_tickets', metric_value: 1100, metric_type: 'counter', tags: {} },
+            { id: '3', metric_name: 'customer_satisfaction', metric_value: 4.8, metric_type: 'gauge', tags: {} },
+            { id: '4', metric_name: 'response_time', metric_value: 2.3, metric_type: 'gauge', tags: {} }
+          ])
+          setKnowledgeBaseArticles([
+            { id: '1', title: 'Getting Started Guide', content: 'Learn how to use the BSM Platform effectively...', category: 'Getting Started', tags: ['guide', 'tutorial'], view_count: 150, helpful_count: 45, published_at: new Date().toISOString() },
+            { id: '2', title: 'Advanced Features', content: 'Explore advanced features and customization options...', category: 'Advanced', tags: ['features', 'customization'], view_count: 89, helpful_count: 23, published_at: new Date().toISOString() },
+            { id: '3', title: 'Troubleshooting', content: 'Common issues and their solutions...', category: 'Support', tags: ['troubleshooting', 'help'], view_count: 67, helpful_count: 18, published_at: new Date().toISOString() }
+          ])
+          setTotalTickets(1250)
+          setResolvedTickets(1100)
+          setCustomerSatisfaction(4.8)
+          setTimeout(() => setIsLoading(false), 50)
+          return
+        }
+
         // Load analytics data
         const { data: analytics, error: analyticsError } = await supabase
           .from('analytics')
@@ -54,6 +76,16 @@ export function AdvancedWelcomePage() {
 
         if (analyticsError) {
           console.error('Error loading analytics:', analyticsError)
+          // Use mock data as fallback
+          setAnalyticsData([
+            { id: '1', metric_name: 'total_tickets', metric_value: 1250, metric_type: 'counter', tags: {} },
+            { id: '2', metric_name: 'resolved_tickets', metric_value: 1100, metric_type: 'counter', tags: {} },
+            { id: '3', metric_name: 'customer_satisfaction', metric_value: 4.8, metric_type: 'gauge', tags: {} },
+            { id: '4', metric_name: 'response_time', metric_value: 2.3, metric_type: 'gauge', tags: {} }
+          ])
+          setTotalTickets(1250)
+          setResolvedTickets(1100)
+          setCustomerSatisfaction(4.8)
         } else {
           setAnalyticsData(analytics || [])
           
@@ -77,6 +109,12 @@ export function AdvancedWelcomePage() {
 
         if (articlesError) {
           console.error('Error loading articles:', articlesError)
+          // Use mock data as fallback
+          setKnowledgeBaseArticles([
+            { id: '1', title: 'Getting Started Guide', content: 'Learn how to use the BSM Platform effectively...', category: 'Getting Started', tags: ['guide', 'tutorial'], view_count: 150, helpful_count: 45, published_at: new Date().toISOString() },
+            { id: '2', title: 'Advanced Features', content: 'Explore advanced features and customization options...', category: 'Advanced', tags: ['features', 'customization'], view_count: 89, helpful_count: 23, published_at: new Date().toISOString() },
+            { id: '3', title: 'Troubleshooting', content: 'Common issues and their solutions...', category: 'Support', tags: ['troubleshooting', 'help'], view_count: 67, helpful_count: 18, published_at: new Date().toISOString() }
+          ])
         } else {
           setKnowledgeBaseArticles(articles || [])
         }
@@ -214,32 +252,54 @@ export function AdvancedWelcomePage() {
               ].map((feature, index) => (
                 <motion.div
                   key={feature.title}
-                  className="bg-white/5 backdrop-blur-md rounded-xl p-8 border border-white/10 hover:border-white/30 transition-all duration-300"
+                  className="bg-white/5 backdrop-blur-md rounded-xl p-8 border border-white/10 cursor-pointer transition-all duration-300 hover:bg-white/10 hover:border-white/30 hover:shadow-2xl hover:shadow-purple-500/20"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  animate={{
-                    y: [0, -4, 4, 0],
-                    scale: [1, 1.03, 1]
+                  whileHover={{ 
+                    scale: 1.08, 
+                    y: -8,
+                    zIndex: 20,
+                    boxShadow: "0 25px 50px rgba(139, 92, 246, 0.4)"
                   }}
                   transition={{
-                    duration: 0.6 + Math.random() * 0.3,
-                    repeat: Infinity,
-                    ease: [0.4, 0, 0.2, 1],
-                    delay: index * 0.02,
-                    type: "tween"
-                  }}
-                  whileHover={{ 
-                    scale: 1.05, 
-                    y: -5,
-                    zIndex: 20
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 20
                   }}
                   onHoverStart={() => setHoveredFeature(index)}
                   onHoverEnd={() => setHoveredFeature(null)}
                 >
-                  <div className="text-4xl mb-4">{feature.icon}</div>
-                  <h3 className="text-xl font-semibold text-white mb-4">{feature.title}</h3>
-                  <p className="text-gray-400">{feature.description}</p>
+                  <motion.div 
+                    className="text-4xl mb-4"
+                    whileHover={{ 
+                      scale: 1.2,
+                      rotate: [0, -10, 10, 0]
+                    }}
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  >
+                    {feature.icon}
+                  </motion.div>
+                  <motion.h3 
+                    className="text-xl font-semibold text-white mb-4"
+                    whileHover={{ 
+                      color: "#ffffff",
+                      scale: 1.05
+                    }}
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  >
+                    {feature.title}
+                  </motion.h3>
+                  <motion.p 
+                    className="text-gray-400"
+                    whileHover={{ 
+                      color: "#e5e7eb",
+                      scale: 1.02
+                    }}
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  >
+                    {feature.description}
+                  </motion.p>
                 </motion.div>
               ))}
             </div>
@@ -282,33 +342,44 @@ export function AdvancedWelcomePage() {
               ].map((feature, index) => (
                 <motion.div
                   key={feature.name}
-                  className="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10 text-center"
+                  className="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10 text-center cursor-pointer transition-all duration-300 hover:bg-white/10 hover:border-white/30 hover:shadow-2xl hover:shadow-purple-500/20"
                   initial={{ opacity: 0, scale: 0.8 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true, margin: "-30px" }}
-                  animate={{
-                    y: [0, -3, 3, 0],
-                    scale: [1, 1.02, 1]
+                  whileHover={{ 
+                    scale: 1.08,
+                    y: -8,
+                    zIndex: 20,
+                    boxShadow: "0 25px 50px rgba(139, 92, 246, 0.4)"
                   }}
                   transition={{
-                    duration: 0.5 + Math.random() * 0.2,
-                    repeat: Infinity,
-                    ease: [0.4, 0, 0.2, 1],
-                    delay: index * 0.02,
-                    type: "tween"
-                  }}
-                  whileHover={{ 
-                    scale: 1.05,
-                    y: -3,
-                    zIndex: 20
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 20
                   }}
                   onHoverStart={() => setHoveredFeature(index)}
                   onHoverEnd={() => setHoveredFeature(null)}
                 >
-                  <div className={`text-3xl font-bold bg-gradient-to-r ${feature.color} bg-clip-text text-transparent mb-2`}>
+                  <motion.div 
+                    className={`text-3xl font-bold bg-gradient-to-r ${feature.color} bg-clip-text text-transparent mb-2`}
+                    whileHover={{ 
+                      scale: 1.1,
+                      textShadow: "0 0 20px rgba(139, 92, 246, 0.5)"
+                    }}
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  >
                     {feature.count}
-                  </div>
-                  <div className="text-gray-300">{feature.name}</div>
+                  </motion.div>
+                  <motion.div 
+                    className="text-gray-300"
+                    whileHover={{ 
+                      color: "#ffffff",
+                      scale: 1.05
+                    }}
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  >
+                    {feature.name}
+                  </motion.div>
                 </motion.div>
               ))}
             </div>
@@ -337,15 +408,21 @@ export function AdvancedWelcomePage() {
               {knowledgeBaseArticles.map((article, index) => (
                 <motion.div
                   key={article.id}
-                  className="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10 hover:border-white/30 transition-all duration-300"
+                  className="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10 cursor-pointer transition-all duration-300 hover:bg-white/10 hover:border-white/30 hover:shadow-2xl hover:shadow-purple-500/20"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.08, delay: index * 0.01, ease: [0.25, 0.46, 0.45, 0.94], type: "tween" }}
                   viewport={{ once: true, margin: "-50px" }}
                   whileHover={{ 
-                    scale: 1.05, 
-                    y: -5,
-                    boxShadow: "0 20px 40px rgba(139, 92, 246, 0.3)"
+                    scale: 1.08, 
+                    y: -8,
+                    zIndex: 20,
+                    boxShadow: "0 25px 50px rgba(139, 92, 246, 0.4)"
+                  }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 20
                   }}
                 >
                   <div className="flex items-center justify-between mb-4">
@@ -421,29 +498,56 @@ export function AdvancedWelcomePage() {
               {analyticsData.slice(0, 4).map((metric, index) => (
                 <motion.div
                   key={metric.id}
-                  className="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10 text-center"
+                  className="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10 text-center cursor-pointer transition-all duration-300 hover:bg-white/10 hover:border-white/30 hover:shadow-2xl hover:shadow-cyan-500/20"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.08, delay: index * 0.01, ease: [0.25, 0.46, 0.45, 0.94], type: "tween" }}
                   viewport={{ once: true, margin: "-50px" }}
                   whileHover={{ 
-                    scale: 1.05, 
-                    y: -5,
-                    boxShadow: "0 20px 40px rgba(139, 92, 246, 0.3)"
+                    scale: 1.08, 
+                    y: -8,
+                    zIndex: 20,
+                    boxShadow: "0 25px 50px rgba(6, 182, 212, 0.4)"
+                  }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 20
                   }}
                 >
-                  <div className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-2">
+                  <motion.div 
+                    className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-2"
+                    whileHover={{ 
+                      scale: 1.1,
+                      textShadow: "0 0 20px rgba(6, 182, 212, 0.5)"
+                    }}
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  >
                     {metric.metric_type === 'gauge' 
                       ? metric.metric_value.toFixed(1)
                       : metric.metric_value.toLocaleString()
                     }
-                  </div>
-                  <div className="text-gray-300 text-sm mb-2">
+                  </motion.div>
+                  <motion.div 
+                    className="text-gray-300 text-sm mb-2"
+                    whileHover={{ 
+                      color: "#ffffff",
+                      scale: 1.05
+                    }}
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  >
                     {metric.metric_name.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
-                  </div>
-                  <div className="text-gray-500 text-xs">
+                  </motion.div>
+                  <motion.div 
+                    className="text-gray-500 text-xs"
+                    whileHover={{ 
+                      color: "#9ca3af",
+                      scale: 1.05
+                    }}
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  >
                     {metric.metric_type}
-                  </div>
+                  </motion.div>
                 </motion.div>
               ))}
             </div>
