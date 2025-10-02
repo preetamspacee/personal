@@ -7,17 +7,23 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
 }
 
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  transform: translateZ(0);
 }
 
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 /* Fix blinking elements */
@@ -28,14 +34,30 @@ body {
   perspective: 1000px;
 }
 
-/* Ultra-fast theme transitions */
+/* Ultra-fast theme transitions with GPU acceleration */
 * {
-  transition: background-color 0.05s ease, color 0.05s ease, border-color 0.05s ease !important;
+  transition: background-color 0.01s ease, color 0.01s ease, border-color 0.01s ease, transform 0.01s ease !important;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform, opacity;
 }
 
-/* Quick hover responses */
+/* Quick hover responses with hardware acceleration */
 *:hover {
-  transition: all 0.05s ease !important;
+  transition: all 0.01s ease !important;
+  transform: translateZ(0);
+}
+
+/* Light mode specific optimizations */
+.light * {
+  transition: background-color 0.005s ease, color 0.005s ease, border-color 0.005s ease !important;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+.light *:hover {
+  transition: all 0.005s ease !important;
 }
 
 /* Disable unnecessary animations on theme switch */
@@ -49,6 +71,39 @@ body {
   -webkit-transform: translateZ(0);
   -webkit-backface-visibility: hidden;
   -webkit-perspective: 1000px;
+}
+
+/* Lag-free hover interactions */
+*:hover {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform, opacity, background-color, color;
+}
+
+/* Light mode hover optimizations */
+.light *:hover {
+  transition: all 0.02s ease !important;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform, opacity, background-color, color;
+}
+
+/* Ultra-fast button interactions */
+button, .btn, [role="button"] {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform, opacity, background-color;
+  transition: all 0.005s ease !important;
+}
+
+button:hover, .btn:hover, [role="button"]:hover {
+  transform: translateZ(0) scale(1.01);
+  transition: all 0.005s ease !important;
+}
+
+button:active, .btn:active, [role="button"]:active {
+  transform: translateZ(0) scale(0.99);
+  transition: all 0.005s ease !important;
 }
 
 /* Reduce motion for better performance */
@@ -128,6 +183,28 @@ canvas {
   content-visibility: auto;
 }
 
+/* Ultra-fast hover performance */
+.hover-optimized {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform, opacity, background-color, color;
+  transition: all 0.02s ease !important;
+}
+
+.hover-optimized:hover {
+  transform: translateZ(0) scale(1.02);
+  transition: all 0.02s ease !important;
+}
+
+/* Light mode specific hover optimizations */
+.light .hover-optimized {
+  transition: all 0.01s ease !important;
+}
+
+.light .hover-optimized:hover {
+  transition: all 0.01s ease !important;
+}
+
 /* Optimize animations for 120fps */
 @supports (display: flex) {
   .smooth-animation {
@@ -137,6 +214,28 @@ canvas {
     -webkit-transform: translateZ(0);
     -webkit-backface-visibility: hidden;
   }
+}
+
+/* High-performance hover states */
+.high-performance-hover {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform, opacity, background-color, color, box-shadow;
+  transition: all 0.02s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.high-performance-hover:hover {
+  transform: translateZ(0) scale(1.02);
+  transition: all 0.02s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Light mode ultra-fast interactions */
+.light .high-performance-hover {
+  transition: all 0.01s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.light .high-performance-hover:hover {
+  transition: all 0.01s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 /* High performance rendering */
@@ -517,16 +616,22 @@ canvas {
   100% { transform: scale(4); opacity: 0; }
 }
 
-/* Enhanced Smooth Theme Transitions */
+/* Enhanced Smooth Theme Transitions - Optimized for Performance */
 * {
-  transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease, transform 0.3s ease;
+  transition: background-color 0.01s ease, color 0.01s ease, border-color 0.01s ease, box-shadow 0.01s ease, transform 0.01s ease;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform, opacity;
 }
 
-/* Light Theme - Live Light Elements */
+/* Light Theme - Optimized Live Light Elements */
 .light {
   background: linear-gradient(135deg, #f0f9ff 0%, #e0e7ff 25%, #f3e8ff 50%, #fef3c7 75%, #f0f9ff 100%);
   background-size: 400% 400%;
-  animation: light-gradient-shift 20s ease infinite;
+  animation: light-gradient-shift 10s ease infinite;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: background-position;
 }
 
 @keyframes light-gradient-shift {
@@ -537,10 +642,13 @@ canvas {
   100% { background-position: 0% 50%; }
 }
 
-/* Light Theme - Glowing Elements */
+/* Light Theme - Optimized Glowing Elements */
 .light .animate-quantum-glow {
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.3), 0 0 40px rgba(139, 92, 246, 0.2);
-  animation: light-glow 3s ease-in-out infinite;
+  animation: light-glow 1.5s ease-in-out infinite;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: box-shadow;
 }
 
 @keyframes light-glow {
@@ -552,11 +660,14 @@ canvas {
   }
 }
 
-/* Light Theme - Shimmer Effects */
+/* Light Theme - Optimized Shimmer Effects */
 .light .animate-holographic-shimmer {
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
   background-size: 200% 100%;
-  animation: light-shimmer 4s ease-in-out infinite;
+  animation: light-shimmer 3s ease-in-out infinite;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: background-position;
 }
 
 @keyframes light-shimmer {
@@ -564,68 +675,177 @@ canvas {
   100% { background-position: 200% 0; }
 }
 
-/* Enhanced Animation Smoothness */
+/* Enhanced Animation Smoothness - Optimized for Performance */
 .animate-fade-in { 
-  animation: fade-in 1s ease-out; 
+  animation: fade-in 0.3s ease-out; 
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: opacity;
 }
 
 .animate-fade-in-up { 
-  animation: fade-in-up 1s ease-out; 
+  animation: fade-in-up 0.3s ease-out; 
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: opacity, transform;
 }
 
 .animate-slide-in-left { 
-  animation: slide-in-left 1s ease-out; 
+  animation: slide-in-left 0.3s ease-out; 
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: opacity, transform;
 }
 
 .animate-slide-in-right { 
-  animation: slide-in-right 1s ease-out; 
+  animation: slide-in-right 0.3s ease-out; 
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: opacity, transform;
 }
 
 .animate-scale-in { 
-  animation: scale-in 1s ease-out; 
+  animation: scale-in 0.3s ease-out; 
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: opacity, transform;
 }
 
 .animate-rotate-in { 
-  animation: rotate-in 1.2s ease-out; 
+  animation: rotate-in 0.4s ease-out; 
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: opacity, transform;
 }
 
-.animate-quantum-pulse { animation: quantum-pulse 4s ease-in-out infinite; }
-.animate-quantum-float { animation: quantum-float 5s ease-in-out infinite; }
-.animate-quantum-glow { animation: quantum-glow 4s ease-in-out infinite; }
+.animate-quantum-pulse { 
+  animation: quantum-pulse 2s ease-in-out infinite; 
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+.animate-quantum-float { 
+  animation: quantum-float 3s ease-in-out infinite; 
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
+}
+.animate-quantum-glow { 
+  animation: quantum-glow 2s ease-in-out infinite; 
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: box-shadow;
+}
 
-.animate-neural-pulse { animation: neural-pulse 3s ease-in-out infinite; }
-.animate-neural-connect { animation: neural-connect 4s ease-in-out infinite; }
+.animate-neural-pulse { 
+  animation: neural-pulse 1.5s ease-in-out infinite; 
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+.animate-neural-connect { 
+  animation: neural-connect 2s ease-in-out infinite; 
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: stroke-dasharray;
+}
 
 .animate-holographic-shimmer { 
-  animation: holographic-shimmer 5s ease-in-out infinite;
+  animation: holographic-shimmer 3s ease-in-out infinite;
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
   background-size: 200% 100%;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: background-position;
 }
 
-.animate-holographic-flicker { animation: holographic-flicker 0.3s ease-in-out infinite; }
+.animate-holographic-flicker { 
+  animation: holographic-flicker 0.1s ease-in-out infinite; 
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: opacity;
+}
 
-.animate-liquid-flow { animation: liquid-flow 4s ease-in-out infinite; }
-.animate-liquid-bubble { animation: liquid-bubble 2s ease-in-out infinite; }
+.animate-liquid-flow { 
+  animation: liquid-flow 2s ease-in-out infinite; 
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
+}
+.animate-liquid-bubble { 
+  animation: liquid-bubble 1s ease-in-out infinite; 
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
 
-.animate-magnetic-attract { animation: magnetic-attract 0.7s ease-out; }
-.animate-magnetic-repel { animation: magnetic-repel 0.7s ease-out; }
+.animate-magnetic-attract { 
+  animation: magnetic-attract 0.3s ease-out; 
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
+}
+.animate-magnetic-repel { 
+  animation: magnetic-repel 0.3s ease-out; 
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
+}
 
-.animate-particle-float { animation: particle-float 8s linear infinite; }
-.animate-particle-explode { animation: particle-explode 2s ease-out; }
+.animate-particle-float { 
+  animation: particle-float 4s linear infinite; 
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+.animate-particle-explode { 
+  animation: particle-explode 1s ease-out; 
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
 
-.animate-circuit-activate { animation: circuit-activate 4s ease-in-out infinite; }
-.animate-circuit-pulse { animation: circuit-pulse 3s ease-in-out infinite; }
+.animate-circuit-activate { 
+  animation: circuit-activate 2s ease-in-out infinite; 
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: stroke-dashoffset;
+}
+.animate-circuit-pulse { 
+  animation: circuit-pulse 1.5s ease-in-out infinite; 
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: stroke-width, opacity;
+}
 
-.animate-energy-flow { animation: energy-flow 4s linear infinite; }
-.animate-energy-orb { animation: energy-orb 4s ease-in-out infinite; }
+.animate-energy-flow { 
+  animation: energy-flow 2s linear infinite; 
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
+}
+.animate-energy-orb { 
+  animation: energy-orb 2s ease-in-out infinite; 
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
+}
 
 .animate-glass-shimmer { 
-  animation: glass-shimmer 5s ease-in-out infinite;
+  animation: glass-shimmer 3s ease-in-out infinite;
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
   background-size: 200% 100%;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: background-position;
 }
 
-.animate-glass-ripple { animation: glass-ripple 1.5s ease-out; }
+.animate-glass-ripple { 
+  animation: glass-ripple 0.5s ease-out; 
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
 
 /* Delay Classes */
 .delay-100 { animation-delay: 0.1s; }
