@@ -18,8 +18,7 @@ export function ImmersiveHero() {
   const springX = useSpring(mouseX, { stiffness: 150, damping: 15 })
   const springY = useSpring(mouseY, { stiffness: 150, damping: 15 })
   
-  const rotateX = useTransform(springY, [-300, 300], [15, -15])
-  const rotateY = useTransform(springX, [-300, 300], [-15, 15])
+  // Removed 3D rotation transforms to eliminate tilting
 
   // Morphing text content
   const morphingTexts = [
@@ -86,7 +85,6 @@ export function ImmersiveHero() {
     return (
       <motion.button
         ref={buttonRef}
-        {...bind()}
         onClick={onClick}
         className={`relative px-8 py-4 rounded-xl font-semibold text-lg overflow-hidden group ${
           variant === 'primary' 
@@ -154,8 +152,8 @@ export function ImmersiveHero() {
           <motion.span
             key={index}
             className="inline-block"
-            initial={{ opacity: 0, y: 20, rotateX: -90 }}
-            animate={{ opacity: 1, y: 0, rotateX: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{
               duration: 0.6,
               delay: index * 0.05,
@@ -211,16 +209,14 @@ export function ImmersiveHero() {
       ref={heroRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
       style={{
-        perspective: '1000px'
+        // Removed perspective to eliminate 3D effects
       }}
     >
-      {/* 3D Transform Container */}
+      {/* Transform Container */}
       <motion.div
         className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
         style={{
-          rotateX,
-          rotateY,
-          transformStyle: 'preserve-3d'
+          // Removed 3D transforms to eliminate tilting
         }}
       >
         <div className="max-w-5xl mx-auto">
@@ -251,9 +247,9 @@ export function ImmersiveHero() {
               <motion.h1
                 key={activeText}
                 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-tight"
-                initial={{ opacity: 0, y: 50, rotateX: -90 }}
-                animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                exit={{ opacity: 0, y: -50, rotateX: 90 }}
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -50 }}
                 transition={{ duration: 0.8, type: "spring", stiffness: 100 }}
                 style={{ transformOrigin: "center bottom" }}
               >
@@ -321,7 +317,7 @@ export function ImmersiveHero() {
               >
                 <motion.div
                   className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-4 bg-gradient-to-r from-white/10 to-white/5 backdrop-blur-md border border-white/20"
-                  whileHover={{ rotate: 360 }}
+                  whileHover={{ scale: 1.1 }}
                   transition={{ duration: 0.6 }}
                 >
                   <stat.icon className="h-8 w-8 text-white" />

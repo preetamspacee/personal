@@ -171,7 +171,6 @@ export function PhotoBoard() {
               viewport={{ once: true }}
               animate={{
                 y: [0, -3, 3, 0],
-                rotate: [0, 1, -1, 0],
                 scale: [1, 1.02, 1]
               }}
               transition={{

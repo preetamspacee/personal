@@ -2,6 +2,252 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Performance optimizations for smooth animations */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Fix blinking elements */
+* {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+}
+
+/* Ultra-fast theme transitions */
+* {
+  transition: background-color 0.05s ease, color 0.05s ease, border-color 0.05s ease !important;
+}
+
+/* Quick hover responses */
+*:hover {
+  transition: all 0.05s ease !important;
+}
+
+/* Disable unnecessary animations on theme switch */
+.theme-transitioning * {
+  transition: none !important;
+  animation: none !important;
+}
+
+/* Performance optimizations for better FPS */
+* {
+  -webkit-transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000px;
+}
+
+/* Reduce motion for better performance */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Optimize canvas rendering */
+canvas {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+}
+
+/* Midnight theme specific performance optimizations */
+.midnight {
+  /* Enhanced GPU acceleration for midnight theme */
+  transform: translateZ(0);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  perspective: 1000px;
+  -webkit-transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000px;
+  contain: layout style paint;
+  content-visibility: auto;
+}
+
+/* Midnight theme ultra-fast transitions */
+.midnight * {
+  transition: background-color 0.05s ease, color 0.05s ease, border-color 0.05s ease !important;
+}
+
+.midnight *:hover {
+  transition: all 0.05s ease !important;
+}
+
+/* Midnight theme specific contrast improvements */
+.midnight .text-gray-600 {
+  color: hsl(var(--text-secondary)) !important;
+}
+
+.midnight .text-gray-700 {
+  color: hsl(var(--text-primary)) !important;
+}
+
+.midnight .bg-gray-800 {
+  background-color: hsl(var(--secondary)) !important;
+}
+
+.midnight .bg-gray-900 {
+  background-color: hsl(var(--background)) !important;
+}
+
+.midnight .border-gray-700 {
+  border-color: hsl(var(--border)) !important;
+}
+
+.midnight .border-gray-600 {
+  border-color: hsl(var(--border-visible)) !important;
+}
+
+/* GPU acceleration for animations */
+.gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  perspective: 1000px;
+  -webkit-transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000px;
+  contain: layout style paint;
+  content-visibility: auto;
+}
+
+/* Optimize animations for 120fps */
+@supports (display: flex) {
+  .smooth-animation {
+    transform: translateZ(0);
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    -webkit-transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+  }
+}
+
+/* High performance rendering */
+.high-performance {
+  contain: layout style paint;
+  content-visibility: auto;
+  contain-intrinsic-size: 0 500px;
+}
+
+/* Optimize canvas rendering */
+canvas {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Performance hints for browsers */
+.performance-hint {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 200px;
+}
+
+/* Theme-specific visibility improvements */
+.light .text-white {
+  color: hsl(var(--text-primary)) !important;
+}
+
+.light .text-gray-300 {
+  color: hsl(var(--text-secondary)) !important;
+}
+
+.light .bg-black {
+  background-color: hsl(var(--bg-overlay)) !important;
+}
+
+.light .border-white\/10 {
+  border-color: hsl(var(--border-visible)) !important;
+}
+
+.midnight .text-white {
+  color: hsl(var(--text-primary)) !important;
+}
+
+.midnight .text-gray-300 {
+  color: hsl(var(--text-secondary)) !important;
+}
+
+.midnight .text-gray-400 {
+  color: hsl(var(--text-secondary)) !important;
+}
+
+.midnight .text-gray-500 {
+  color: hsl(var(--text-secondary)) !important;
+}
+
+.midnight .bg-black {
+  background-color: hsl(var(--bg-overlay)) !important;
+}
+
+.midnight .bg-white\/5 {
+  background-color: hsl(var(--secondary)) !important;
+}
+
+.midnight .bg-white\/10 {
+  background-color: hsl(var(--muted)) !important;
+}
+
+.midnight .border-white\/10 {
+  border-color: hsl(var(--border-visible)) !important;
+}
+
+.midnight .border-white\/20 {
+  border-color: hsl(var(--border-visible)) !important;
+}
+
+.midnight .border-white\/30 {
+  border-color: hsl(var(--primary)) !important;
+}
+
+/* Enhanced midnight theme contrast */
+.midnight .backdrop-blur-md {
+  backdrop-filter: blur(12px);
+  background-color: hsl(var(--card) / 0.8) !important;
+}
+
+.midnight .hover\:border-white\/30:hover {
+  border-color: hsl(var(--primary)) !important;
+}
+
+.midnight .hover\:bg-white\/20:hover {
+  background-color: hsl(var(--muted)) !important;
+}
+
+/* Ensure text visibility in all themes */
+.light .text-foreground {
+  color: hsl(var(--text-primary)) !important;
+}
+
+.midnight .text-foreground {
+  color: hsl(var(--text-primary)) !important;
+}
+
 /* Theme Variables */
 :root {
   /* Light Theme */
@@ -25,6 +271,12 @@
   --input: 214.3 31.8% 91.4%;
   --ring: 221.2 83.2% 53.3%;
   --radius: 0.5rem;
+  
+  /* Light theme specific overrides for visibility */
+  --text-primary: 222.2 84% 4.9%;
+  --text-secondary: 215.4 16.3% 46.9%;
+  --bg-overlay: 0 0% 100%;
+  --border-visible: 214.3 31.8% 91.4%;
 }
 
 .dark {
@@ -51,26 +303,32 @@
 }
 
 .midnight {
-  /* Midnight Theme */
-  --background: 222.2 84% 2%;
-  --foreground: 210 40% 98%;
-  --card: 222.2 84% 2%;
-  --card-foreground: 210 40% 98%;
-  --popover: 222.2 84% 2%;
-  --popover-foreground: 210 40% 98%;
-  --primary: 262.1 83.3% 57.8%;
-  --primary-foreground: 210 40% 98%;
-  --secondary: 217.2 32.6% 8%;
-  --secondary-foreground: 210 40% 98%;
-  --muted: 217.2 32.6% 8%;
-  --muted-foreground: 215 20.2% 65.1%;
-  --accent: 217.2 32.6% 8%;
-  --accent-foreground: 210 40% 98%;
-  --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 210 40% 98%;
-  --border: 217.2 32.6% 8%;
-  --input: 217.2 32.6% 8%;
-  --ring: 262.1 83.3% 57.8%;
+  /* Midnight Theme - Enhanced for better contrast */
+  --background: 222.2 84% 1%;
+  --foreground: 210 50% 98%;
+  --card: 222.2 84% 3%;
+  --card-foreground: 210 50% 98%;
+  --popover: 222.2 84% 3%;
+  --popover-foreground: 210 50% 98%;
+  --primary: 262.1 83.3% 65%;
+  --primary-foreground: 210 50% 98%;
+  --secondary: 217.2 32.6% 12%;
+  --secondary-foreground: 210 50% 98%;
+  --muted: 217.2 32.6% 12%;
+  --muted-foreground: 215 25% 80%;
+  --accent: 217.2 32.6% 12%;
+  --accent-foreground: 210 50% 98%;
+  --destructive: 0 70% 50%;
+  --destructive-foreground: 210 50% 98%;
+  --border: 217.2 32.6% 20%;
+  --input: 217.2 32.6% 12%;
+  --ring: 262.1 83.3% 65%;
+  
+  /* Midnight theme specific overrides for visibility */
+  --text-primary: 210 50% 98%;
+  --text-secondary: 215 25% 85%;
+  --bg-overlay: 222.2 84% 3%;
+  --border-visible: 217.2 32.6% 25%;
 }
 
 @layer base {
@@ -386,6 +644,8 @@
   transform: translateZ(0);
   backface-visibility: hidden;
   perspective: 1000px;
+  contain: layout style paint;
+  content-visibility: auto;
 }
 
 .will-change-transform {

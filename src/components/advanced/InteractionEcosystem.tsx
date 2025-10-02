@@ -247,9 +247,10 @@ export function InteractionEcosystem() {
                   opacity: [1, 0]
                 }}
                 transition={{
-                  duration: 1.2,
-                  delay: i * 0.08,
-                  ease: [0.25, 0.46, 0.45, 0.94]
+                  duration: 0.3,
+                  delay: i * 0.01,
+                  ease: [0.25, 0.46, 0.45, 0.94],
+                  type: "tween"
                 }}
               />
             ))}
@@ -286,9 +287,10 @@ export function InteractionEcosystem() {
                   opacity: [1, 0]
                 }}
                 transition={{
-                  duration: 1.2,
-                  delay: i * 0.03,
-                  ease: [0.25, 0.46, 0.45, 0.94]
+                  duration: 0.3,
+                  delay: i * 0.01,
+                  ease: [0.25, 0.46, 0.45, 0.94],
+                  type: "tween"
                 }}
               />
             ))}
@@ -319,11 +321,11 @@ export function InteractionEcosystem() {
               animate={{ 
                 scale: [0, 1.5],
                 opacity: [1, 0],
-                rotate: [0, 360]
               }}
               transition={{
-                duration: 0.8,
-                ease: [0.25, 0.46, 0.45, 0.94]
+                duration: 0.2,
+                ease: [0.25, 0.46, 0.45, 0.94],
+                type: "tween"
               }}
             />
           </motion.div>
@@ -358,9 +360,10 @@ export function InteractionEcosystem() {
                   rotate: i * 45
                 }}
                 transition={{
-                  duration: 1,
-                  delay: i * 0.05,
-                  ease: [0.4, 0, 0.2, 1]
+                  duration: 0.25,
+                  delay: i * 0.01,
+                  ease: [0.4, 0, 0.2, 1],
+                  type: "tween"
                 }}
               />
             ))}
@@ -388,23 +391,23 @@ export function InteractionEcosystem() {
       
       // Trigger ripple effect
       setRippleTrigger(true)
-      setTimeout(() => setRippleTrigger(false), 1200)
+      setTimeout(() => setRippleTrigger(false), 300)
       
       // Trigger other effects with delays
       setTimeout(() => {
         setParticleTrigger(true)
-        setTimeout(() => setParticleTrigger(false), 1500)
-      }, 100)
+        setTimeout(() => setParticleTrigger(false), 300)
+      }, 25)
       
       setTimeout(() => {
         setEnergyTrigger(true)
-        setTimeout(() => setEnergyTrigger(false), 1500)
-      }, 200)
+        setTimeout(() => setEnergyTrigger(false), 200)
+      }, 50)
       
       setTimeout(() => {
         setHolographicTrigger(true)
-        setTimeout(() => setHolographicTrigger(false), 1500)
-      }, 300)
+        setTimeout(() => setHolographicTrigger(false), 250)
+      }, 75)
     }
   }
 
@@ -417,7 +420,7 @@ export function InteractionEcosystem() {
           y: Math.random() * 300 + 100
         })
         setRippleTrigger(true)
-        setTimeout(() => setRippleTrigger(false), 1200)
+        setTimeout(() => setRippleTrigger(false), 300)
       }
     }, 8000)
 
@@ -427,7 +430,7 @@ export function InteractionEcosystem() {
   return (
     <section 
       ref={containerRef}
-      className="relative py-20 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 overflow-hidden"
+      className="relative py-20 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 overflow-hidden gpu-accelerated"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -450,7 +453,7 @@ export function InteractionEcosystem() {
 
         {/* Interactive Elements Grid */}
         <div 
-          className="relative h-96 mb-16 cursor-pointer"
+          className="relative h-96 mb-16 cursor-pointer gpu-accelerated"
           onClick={handleClick}
         >
           {/* Gravitational Elements */}
@@ -479,67 +482,70 @@ export function InteractionEcosystem() {
 
           {/* Interactive Clickable Circles */}
           <motion.div
-            className="absolute top-1/2 left-1/4 w-20 h-20 rounded-full border-2 border-cyan-400 bg-cyan-400/10 cursor-pointer"
-            whileHover={{ scale: 1.2 }}
-            whileTap={{ scale: 0.9 }}
+            className="absolute top-1/2 left-1/4 w-20 h-20 rounded-full border-2 border-cyan-400 bg-cyan-400/10 cursor-pointer gpu-accelerated"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             onClick={(e) => {
               e.stopPropagation()
               setClickPosition({ x: e.currentTarget.offsetLeft + 40, y: e.currentTarget.offsetTop + 40 })
               setRippleTrigger(true)
-              setTimeout(() => setRippleTrigger(false), 1200)
+              setTimeout(() => setRippleTrigger(false), 300)
             }}
             animate={{
               scale: [1, 1.1, 1],
               opacity: [0.7, 1, 0.7]
             }}
             transition={{
-              duration: 2,
+              duration: 0.5,
               repeat: Infinity,
-              ease: [0.4, 0, 0.2, 1]
+              ease: [0.4, 0, 0.2, 1],
+              type: "tween"
             }}
           />
           
           <motion.div
-            className="absolute top-1/3 right-1/4 w-16 h-16 rounded-full border-2 border-purple-400 bg-purple-400/10 cursor-pointer"
-            whileHover={{ scale: 1.3 }}
-            whileTap={{ scale: 0.8 }}
+            className="absolute top-1/3 right-1/4 w-16 h-16 rounded-full border-2 border-purple-400 bg-purple-400/10 cursor-pointer gpu-accelerated"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             onClick={(e) => {
               e.stopPropagation()
               setClickPosition({ x: e.currentTarget.offsetLeft + 32, y: e.currentTarget.offsetTop + 32 })
               setParticleTrigger(true)
-              setTimeout(() => setParticleTrigger(false), 1500)
+              setTimeout(() => setParticleTrigger(false), 300)
             }}
             animate={{
               scale: [1, 1.2, 1],
               opacity: [0.6, 1, 0.6]
             }}
             transition={{
-              duration: 1.8,
+              duration: 0.45,
               repeat: Infinity,
               ease: [0.4, 0, 0.2, 1],
-              delay: 0.3
+              delay: 0.08,
+              type: "tween"
             }}
           />
           
           <motion.div
-            className="absolute bottom-1/3 left-1/3 w-24 h-24 rounded-full border-2 border-emerald-400 bg-emerald-400/10 cursor-pointer"
-            whileHover={{ scale: 1.15 }}
-            whileTap={{ scale: 0.85 }}
+            className="absolute bottom-1/3 left-1/3 w-24 h-24 rounded-full border-2 border-emerald-400 bg-emerald-400/10 cursor-pointer gpu-accelerated"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             onClick={(e) => {
               e.stopPropagation()
               setClickPosition({ x: e.currentTarget.offsetLeft + 48, y: e.currentTarget.offsetTop + 48 })
               setEnergyTrigger(true)
-              setTimeout(() => setEnergyTrigger(false), 1500)
+              setTimeout(() => setEnergyTrigger(false), 200)
             }}
             animate={{
               scale: [1, 1.3, 1],
               opacity: [0.5, 1, 0.5]
             }}
             transition={{
-              duration: 2.5,
+              duration: 0.6,
               repeat: Infinity,
               ease: [0.4, 0, 0.2, 1],
-              delay: 0.6
+              delay: 0.15,
+              type: "tween"
             }}
           />
 

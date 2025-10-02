@@ -15,11 +15,7 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { name: 'Home', href: '#home', icon: Home, description: 'Return to the main dashboard' },
-  { name: 'About', href: '#about', icon: Users, description: 'Learn about our platform' },
-  { name: 'Features', href: '#features', icon: Settings, description: 'Explore our capabilities' },
-  { name: 'Analytics', href: '#analytics', icon: BarChart3, description: 'View performance metrics' },
-  { name: 'Support', href: '#support', icon: MessageSquare, description: 'Get help and support' }
+  // Navigation tabs removed as requested
 ]
 
 export function MorphingNavigation() {
@@ -32,9 +28,9 @@ export function MorphingNavigation() {
   const navRef = useRef<HTMLDivElement>(null)
   
   const { scrollY } = useScroll()
-  const y = useTransform(scrollY, [0, 100], [0, -50])
-  const opacity = useTransform(scrollY, [0, 100], [1, 0.8])
-  const scale = useTransform(scrollY, [0, 100], [1, 0.95])
+  const y = useTransform(scrollY, [0, 100], [0, -20])
+  const opacity = useTransform(scrollY, [0, 100], [1, 0.9])
+  const scale = useTransform(scrollY, [0, 100], [1, 0.98])
 
   // Mouse tracking for magnetic effects
   useEffect(() => {
@@ -94,7 +90,6 @@ export function MorphingNavigation() {
     return (
       <motion.button
         ref={buttonRef}
-        {...bind()}
         onClick={onClick}
         className="relative p-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 transition-all duration-300"
         whileHover={{ scale: 1.2 }}
@@ -173,8 +168,7 @@ export function MorphingNavigation() {
                 'drop-shadow(0 0 20px rgba(139, 92, 246, 0.5))',
                 'drop-shadow(0 0 10px rgba(0, 102, 255, 0.5))'
               ],
-              y: [0, -2, 2, 0],
-              rotate: [0, 1, -1, 0]
+              y: [0, -2, 2, 0]
             }}
             transition={{ 
               duration: 4, 
@@ -201,100 +195,7 @@ export function MorphingNavigation() {
             </motion.span>
           </motion.div>
 
-          {/* Desktop Navigation - Arranged in Line with Enhanced Animations */}
-          <div className="hidden md:flex items-center space-x-6">
-            {navItems.map((item, index) => (
-              <motion.a
-                key={item.name}
-                href={item.href}
-                className="relative flex items-center space-x-2 px-4 py-2 rounded-lg text-gray-300 hover:text-white transition-all duration-500 group"
-                onMouseEnter={() => setActiveItem(index)}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{
-                  opacity: 1,
-                  y: 0
-                }}
-                whileHover={{ 
-                  scale: 1.15, 
-                  y: -8,
-                  boxShadow: "0 15px 35px rgba(139, 92, 246, 0.6)"
-                }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ 
-                  delay: index * 0.1,
-                  type: "spring",
-                  stiffness: 120,
-                  damping: 20
-                }}
-              >
-                <motion.div
-                  className="relative"
-                  whileHover={{ rotate: 360 }}
-                  transition={{ duration: 0.8, ease: "easeInOut" }}
-                >
-                  <item.icon className="h-5 w-5" />
-                  {/* Pulsing Glow Effect */}
-                  <motion.div
-                    className="absolute inset-0 rounded-full"
-                    animate={{
-                      boxShadow: [
-                        "0 0 0px rgba(139, 92, 246, 0.3)",
-                        "0 0 20px rgba(139, 92, 246, 0.6)",
-                        "0 0 0px rgba(139, 92, 246, 0.3)"
-                      ]
-                    }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                  />
-                </motion.div>
-                <span className="font-medium relative z-10">{item.name}</span>
-                
-                {/* Animated Underline */}
-                <motion.div
-                  className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400"
-                  initial={{ width: 0 }}
-                  animate={{ width: activeItem === index ? '100%' : 0 }}
-                  transition={{ duration: 0.4, ease: "easeOut" }}
-                />
-                
-                {/* Background Glow */}
-                <motion.div
-                  className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-30 bg-gradient-to-r from-blue-500/30 to-purple-500/30 blur-sm"
-                  transition={{ duration: 0.3 }}
-                />
-                
-                {/* Floating Particles */}
-                <motion.div
-                  className="absolute inset-0 overflow-hidden rounded-lg"
-                  initial={{ opacity: 0 }}
-                  whileHover={{ opacity: 1 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {[...Array(3)].map((_, i) => (
-                    <motion.div
-                      key={i}
-                      className="absolute w-1 h-1 bg-white rounded-full"
-                      initial={{ 
-                        x: Math.random() * 100, 
-                        y: Math.random() * 100,
-                        opacity: 0 
-                      }}
-                      animate={{ 
-                        x: Math.random() * 100, 
-                        y: Math.random() * 100,
-                        opacity: [0, 1, 0]
-                      }}
-                      transition={{ 
-                        duration: 2, 
-                        repeat: Infinity, 
-                        delay: i * 0.3,
-                        ease: "easeInOut"
-                      }}
-                    />
-                  ))}
-                </motion.div>
-              </motion.a>
-            ))}
-          </div>
+          {/* Desktop Navigation - Removed as requested */}
 
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center space-x-4">
@@ -370,53 +271,9 @@ export function MorphingNavigation() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            className="md:hidden absolute top-16 left-0 right-0 bg-black/80 backdrop-blur-md border-t border-white/20"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="px-4 py-6 space-y-4">
-              {navItems.map((item, index) => (
-                <motion.a
-                  key={item.name}
-                  href={item.href}
-                  className="flex items-center space-x-3 text-gray-300 hover:text-white transition-colors duration-300"
-                  initial={{ x: -20, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: index * 0.1 }}
-                  onClick={() => setIsOpen(false)}
-                >
-                  <item.icon className="h-5 w-5" />
-                  <span>{item.name}</span>
-                </motion.a>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Mobile Menu - Removed as requested */}
 
-      {/* Orbital Menu for Desktop */}
-      <div className="hidden md:block fixed top-20 right-8">
-        <animated.div
-          style={orbitalSpring}
-          className="relative w-32 h-32"
-        >
-          {navItems.map((item, index) => (
-            <MagneticButton
-              key={item.name}
-              index={index}
-              onClick={() => setActiveItem(index)}
-            >
-              <item.icon className="h-5 w-5 text-white" />
-            </MagneticButton>
-          ))}
-        </animated.div>
-      </div>
+      {/* Orbital Menu - Removed as requested */}
     </motion.nav>
   )
 }
