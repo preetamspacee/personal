@@ -13,7 +13,6 @@ const nextConfig = {
   },
   // Performance optimizations
   experimental: {
-    optimizeCss: true,
     optimizePackageImports: ['lucide-react', 'framer-motion', '@radix-ui'],
     serverComponentsExternalPackages: ['three', '@react-three/fiber'],
   },

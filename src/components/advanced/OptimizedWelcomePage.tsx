@@ -1,14 +1,12 @@
 'use client'
 
-import { useState, useEffect, memo, useCallback } from 'react'
+import React, { useState, useEffect, memo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { supabase } from '@/lib/supabase/client'
 import Link from 'next/link'
 
-// Lazy-loaded heavy components with optimized versions
-const LazyQuantumBackground = memo(() => import('./OptimizedQuantumBackground').then(m => ({ default: m.OptimizedQuantumBackground })))
-const LazyDataVisualization = memo(() => import('./DataVisualization').then(m => ({ default: m.DataVisualization })))
-const LazyInteractionEcosystem = memo(() => import('./InteractionEcosystem').then(m => ({ default: m.InteractionEcosystem })))
+// Import optimized quantum background directly for better performance
+import { OptimizedQuantumBackground } from './OptimizedQuantumBackground'
 
 // Types for dynamic data
 interface AnalyticsData {
@@ -42,8 +40,8 @@ const MemoizedHeroSection = memo(({ onDemoMode, isDemoMode }: { onDemoMode: () =
       }}
     />
     
-    {/* Lazy-loaded QuantumBackground */}
-    <LazyQuantumBackground />
+    {/* Optimized QuantumBackground */}
+    <OptimizedQuantumBackground />
     
     {/* Hero content with optimized animations */}
     <div className="relative z-10 text-center px-4 max-w-6xl mx-auto">
@@ -455,17 +453,36 @@ export function OptimizedWelcomePage() {
       {/* Optimized statistics section */}
       <MemoizedStatsSection />
 
-      {/* Lazy-loaded data visualization */}
+      {/* Demo mode data section */}
       <AnimatePresence>
         {isDemoMode && (
           <motion.div
+            className="py-20 bg-gradient-to-r from-gray-800 to-gray-900"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <LazyDataVisualization data={mockData} />
-            <LazyInteractionEcosystem />
+            <div className="container mx-auto px-4 text-center">
+              <h3 className="text-3xl font-bold text-white mb-8">Demo Mode Active</h3>
+              <p className="text-gray-400 mb-6">Advanced data visualization and interactive ecosystem would load here</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <motion.div 
+                  className="bg-gray-800/50 backdrop-blur-lg border border-gray-600 rounded-lg p-6"
+                  whileHover={{ scale: 1.02 }}
+                >
+                  <h4 className="text-lg font-semibold text-white mb-2">Data Visualization</h4>
+                  <p className="text-gray-400 text-sm">Real-time analytics and performance metrics</p>
+                </motion.div>
+                <motion.div 
+                  className="bg-gray-800/50 backdrop-blur-lg border border-gray-600 rounded-lg p-6"
+                  whileHover={{ scale: 1.02 }}
+                >
+                  <h4 className="text-lg font-semibold text-white mb-2">Interaction Ecosystem</h4>
+                  <p className="text-gray-400 text-sm">Multi-channel communication hub</p>
+                </motion.div>
+              </div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
