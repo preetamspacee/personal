@@ -311,6 +311,7 @@ export function MorphingNavigation() {
               }}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
+              onClick={() => window.location.href = '/auth/login'}
             >
               Login
             </motion.button>
@@ -327,6 +328,7 @@ export function MorphingNavigation() {
               }}
               whileHover={{ scale: 1.1, boxShadow: '0 0 30px rgba(139, 92, 246, 0.7)' }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => window.location.href = '/auth/login?role=admin'}
             >
               Get Started
             </motion.button>

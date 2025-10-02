@@ -37,10 +37,11 @@ export default function CustomerDashboard() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    if (!user || user.role !== 'customer') {
-      router.push('/auth/login?role=customer')
-      return
-    }
+    // For demo purposes, bypass authentication check
+    // if (!user || user.role !== 'customer') {
+    //   router.push('/auth/login?role=customer')
+    //   return
+    // }
     fetchDashboardData()
   }, [user, router])
 

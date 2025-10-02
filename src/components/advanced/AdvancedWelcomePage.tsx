@@ -270,18 +270,18 @@ export function AdvancedWelcomePage() {
                   className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-lg font-semibold rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
-                  onClick={() => window.location.href = '/admin/dashboard'}
+                  onClick={() => window.location.href = '/auth/login?role=admin'}
                 >
-                  Access Admin Dashboard
+                  Get Started
                 </motion.button>
                 
                 <motion.button
                   className="px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white text-lg font-semibold rounded-xl hover:bg-white/20 transition-all duration-300"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
-                  onClick={() => window.location.href = '/customer/dashboard'}
+                  onClick={() => window.location.href = '/auth/login'}
                 >
-                  Go to Customer Portal
+                  Login
                 </motion.button>
               </div>
             </motion.div>

@@ -13,17 +13,37 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // Mock user for frontend development
-    setUser({
-      id: 'mock-user-id',
-      email: 'demo@bsm-platform.com',
-      role: 'admin',
-      full_name: 'Demo User',
-      avatar_url: null,
-      is_verified: true,
-      last_login: new Date().toISOString(),
-    })
-    setLoading(false)
+    // Get initial session
+    const getInitialSession = async () => {
+      try {
+        const { data: { session } } = await supabase.auth.getSession()
+        if (session?.user) {
+          await fetchUserProfile(session.user)
+        }
+      } catch (error) {
+        console.error('Error getting initial session:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    getInitialSession()
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        console.log('Auth state changed:', event, session?.user?.email)
+        
+        if (session?.user) {
+          await fetchUserProfile(session.user)
+        } else {
+          setUser(null)
+        }
+        setLoading(false)
+      }
+    )
+
+    return () => subscription.unsubscribe()
   }, [])
 
   const fetchUserProfile = async (authUser: User) => {
@@ -36,8 +56,50 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       if (error) {
         console.error('Error fetching user profile:', error)
+        // If user doesn't exist in our users table, create a basic profile
+        const { data: newUser, error: insertError } = await supabase
+          .from('users')
+          .insert({
+            id: authUser.id,
+            email: authUser.email!,
+            full_name: authUser.user_metadata?.full_name || '',
+            role: 'customer', // Default role
+            is_verified: authUser.email_confirmed_at ? true : false,
+            last_login: new Date().toISOString(),
+          })
+          .select()
+          .single()
+
+        if (insertError) {
+          console.error('Error creating user profile:', insertError)
+          // Fallback to basic user data
+          setUser({
+            ...authUser,
+            role: 'customer',
+            full_name: authUser.user_metadata?.full_name || '',
+            avatar_url: authUser.user_metadata?.avatar_url || null,
+            is_verified: authUser.email_confirmed_at ? true : false,
+            last_login: new Date().toISOString(),
+          })
+          return
+        }
+
+        setUser({
+          ...authUser,
+          role: newUser.role,
+          full_name: newUser.full_name,
+          avatar_url: newUser.avatar_url,
+          is_verified: newUser.is_verified,
+          last_login: newUser.last_login,
+        })
         return
       }
+
+      // Update last login
+      await supabase
+        .from('users')
+        .update({ last_login: new Date().toISOString() })
+        .eq('id', authUser.id)
 
       setUser({
         ...authUser,
@@ -54,58 +116,118 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signIn = async ({ email, password, role }: { email: string; password: string; role: 'admin' | 'customer' }) => {
     try {
-      // Mock authentication for frontend development
-      setUser({
-        id: 'mock-user-id',
+      setLoading(true)
+      
+      console.log('Attempting Supabase sign in with:', { email, role })
+      
+      const { data, error } = await supabase.auth.signInWithPassword({
         email,
-        role,
-        full_name: role === 'admin' ? 'Admin User' : 'Customer User',
-        avatar_url: null,
-        is_verified: true,
-        last_login: new Date().toISOString(),
+        password,
       })
-      toast.success('Successfully signed in!')
+
+      if (error) {
+        console.error('Supabase auth error:', error)
+        toast.error(error.message || 'Invalid email or password')
+        throw error
+      }
+
+      if (data.user) {
+        console.log('Supabase auth successful:', data.user.email)
+        
+        // Update user role if needed
+        if (role) {
+          await supabase
+            .from('users')
+            .update({ role })
+            .eq('id', data.user.id)
+        }
+        
+        await fetchUserProfile(data.user)
+        toast.success('Successfully signed in!')
+      }
     } catch (error: any) {
+      console.error('Sign in error:', error)
       toast.error(error.message || 'Failed to sign in')
       throw error
+    } finally {
+      setLoading(false)
     }
   }
 
   const signUp = async ({ email, password, full_name, role }: { email: string; password: string; full_name: string; role: 'admin' | 'customer' }) => {
     try {
-      // Mock signup for frontend development
-      setUser({
-        id: 'mock-user-id',
+      setLoading(true)
+      
+      console.log('Attempting Supabase sign up with:', { email, full_name, role })
+      
+      const { data, error } = await supabase.auth.signUp({
         email,
-        role,
-        full_name,
-        avatar_url: null,
-        is_verified: true,
-        last_login: new Date().toISOString(),
+        password,
+        options: {
+          data: {
+            full_name,
+            role,
+          }
+        }
       })
-      toast.success('Account created successfully!')
+
+      if (error) {
+        console.error('Supabase signup error:', error)
+        toast.error(error.message || 'Failed to create account')
+        throw error
+      }
+
+      if (data.user) {
+        console.log('Supabase signup successful:', data.user.email)
+        toast.success('Account created successfully! Please check your email to verify your account.')
+      }
     } catch (error: any) {
+      console.error('Signup error:', error)
       toast.error(error.message || 'Failed to create account')
       throw error
+    } finally {
+      setLoading(false)
     }
   }
 
   const signOut = async () => {
     try {
-      // Mock signout for frontend development
+      setLoading(true)
+      
+      const { error } = await supabase.auth.signOut()
+      
+      if (error) {
+        console.error('Supabase signout error:', error)
+        toast.error(error.message || 'Failed to sign out')
+        throw error
+      }
+      
       setUser(null)
       toast.success('Successfully signed out!')
     } catch (error: any) {
+      console.error('Signout error:', error)
       toast.error(error.message || 'Failed to sign out')
       throw error
+    } finally {
+      setLoading(false)
     }
   }
 
   const resetPassword = async (email: string) => {
     try {
-      // Mock password reset for frontend development
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/auth/reset-password`,
+      })
+      
+      if (error) {
+        console.error('Supabase reset password error:', error)
+        toast.error(error.message || 'Failed to send reset email')
+        throw error
+      }
+      
       toast.success('Password reset email sent!')
     } catch (error: any) {
+      console.error('Reset password error:', error)
       toast.error(error.message || 'Failed to send reset email')
       throw error
     }
@@ -115,10 +237,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       if (!user) throw new Error('No user logged in')
 
-      // Mock profile update for frontend development
+      const { error } = await supabase
+        .from('users')
+        .update(updates)
+        .eq('id', user.id)
+
+      if (error) {
+        console.error('Supabase profile update error:', error)
+        toast.error(error.message || 'Failed to update profile')
+        throw error
+      }
+
       setUser({ ...user, ...updates })
       toast.success('Profile updated successfully!')
     } catch (error: any) {
+      console.error('Update profile error:', error)
       toast.error(error.message || 'Failed to update profile')
       throw error
     }
