@@ -5,8 +5,13 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { supabase } from '@/lib/supabase/client'
 import Link from 'next/link'
 
-// Import optimized quantum background directly for better performance
+// Import all advanced components for full experience
 import { OptimizedQuantumBackground } from './OptimizedQuantumBackground'
+import { DataVisualization } from './DataVisualization'
+import { ImmersiveHero } from './ImmersiveHero'
+import { InteractionEcosystem } from './InteractionEcosystem'
+import { PhotoBoard } from './PhotoBoard'
+import { MorphingNavigation } from './MorphingNavigation'
 
 // Types for dynamic data
 interface AnalyticsData {
@@ -447,62 +452,259 @@ export function OptimizedWelcomePage() {
 
   return (
     <div className="min-h-screen">
-      {/* Main hero section */}
+      {/* Morphing Navigation */}
+      <MorphingNavigation isDemoMode={isDemoMode} onToggleDemo={() => setIsDemoMode(!isDemoMode)} />
+      
+      {/* Immersive Hero Section */}
+      <ImmersiveHero />
+
+      {/* Main Landing Hero */}
       <MemoizedHeroSection onDemoMode={toggleDemoMode} isDemoMode={isDemoMode} />
       
-      {/* Optimized statistics section */}
+      {/* Platform Statistics */}
       <MemoizedStatsSection />
 
-      {/* Demo mode data section */}
-      <AnimatePresence>
-        {isDemoMode && (
+      {/* Data Visualization Section */}
+      <section className="py-20 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+        <div className="container mx-auto px-4">
           <motion.div
-            className="py-20 bg-gradient-to-r from-gray-800 to-gray-900"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <div className="container mx-auto px-4 text-center">
-              <h3 className="text-3xl font-bold text-white mb-8">Demo Mode Active</h3>
-              <p className="text-gray-400 mb-6">Advanced data visualization and interactive ecosystem would load here</p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <motion.div 
-                  className="bg-gray-800/50 backdrop-blur-lg border border-gray-600 rounded-lg p-6"
-                  whileHover={{ scale: 1.02 }}
+            <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
+              Real-time <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">Analytics</span>
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Advanced data visualization and performance metrics with interactive charts and live updates
+            </p>
+          </motion.div>
+          
+          <DataVisualization />
+        </div>
+      </section>
+
+      {/* Photo Board Section */}
+      <section className="py-20 bg-gradient-to-r from-gray-900 to-slate-900">
+        <div className="container mx-auto px-4">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
+              Visual <span className="bg-gradient-to-r from-green-400 to-teal-500 bg-clip-text text-transparent">Knowledge Base</span>
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Interactive media gallery with intelligent content organization
+            </p>
+          </motion.div>
+          
+          <PhotoBoard />
+        </div>
+      </section>
+
+      {/* Interaction Ecosystem */}
+      <section className="py-20 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
+        <div className="container mx-auto px-4">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
+              Multi-Channel <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">Ecosystem</span>
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Unified communication hub connecting all service channels
+            </p>
+          </motion.div>
+          
+          <InteractionEcosystem />
+        </div>
+      </section>
+
+      {/* Enterprise Features Section */}
+      <section className="py-20 bg-gradient-to-r from-purple-900 to-pink-900">
+        <div className="container mx-auto px-4">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
+              Enterprise <span className="bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">Features</span>
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Advanced enterprise capabilities for modern business
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Feature Cards */}
+            {[
+              {
+                title: "AI-Powered Automation",
+                description: "Intelligent workflow automation and predictive analytics",
+                icon: "🤖",
+                gradient: "from-purple-500 to-pink-500"
+              },
+              {
+                title: "Scalable Infrastructure", 
+                description: "Cloud-native architecture with auto-scaling capabilities",
+                icon: "☁️",
+                gradient: "from-blue-500 to-cyan-500"
+              },
+              {
+                title: "Advanced Security",
+                description: "Enterprise-grade security with SSO and audit trails", 
+                icon: "🔒",
+                gradient: "from-green-500 to-teal-500"
+              },
+              {
+                title: "Real-time Monitoring",
+                description: "Live system monitoring with alerts and dashboards",
+                icon: "📊",
+                gradient: "from-orange-500 to-red-500"
+              },
+              {
+                title: "Integration Hub",
+                description: "Connect all your tools and services seamlessly",
+                icon: "🔗", 
+                gradient: "from-indigo-500 to-purple-500"
+              },
+              {
+                title: "Global Support",
+                description: "24/7 support with multiple contact channels",
+                icon: "🌍",
+                gradient: "from-emerald-500 to-blue-500"
+              }
+            ].map((feature, index) => (
+              <motion.div
+                key={index}
+                className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-8 hover:bg-white/20 transition-all duration-300"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: index * 0.1 }}
+                whileHover={{ scale: 1.05, y: -10 }}
+              >
+                <div className="text-center">
+                  <div className="text-6xl mb-4">{feature.icon}</div>
+                  <h3 className={`text-2xl font-bold mb-4 bg-gradient-to-r ${feature.gradient} bg-clip-text text-transparent`}>
+                    {feature.title}
+                  </h3>
+                  <p className="text-gray-300">{feature.description}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Call to Action Section */}
+      <section className="py-20 bg-gradient-to-br from-slate-900 to-gray-900">
+        <div className="container mx-auto px-4 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
+              Ready to Transform Your <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">Operations?</span>
+            </h2>
+            <p className="text-xl text-gray-300 mb-12 max-w-3xl mx-auto">
+              Join thousands of enterprises using BSM Platform to streamline their service operations
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <Link href="/auth/signup">
+                <motion.button
+                  className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-600 text-white rounded-xl font-semibold text-lg hover:shadow-2xl hover:shadow-purple-500/25"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  <h4 className="text-lg font-semibold text-white mb-2">Data Visualization</h4>
-                  <p className="text-gray-400 text-sm">Real-time analytics and performance metrics</p>
-                </motion.div>
-                <motion.div 
-                  className="bg-gray-800/50 backdrop-blur-lg border border-gray-600 rounded-lg p-6"
-                  whileHover={{ scale: 1.02 }}
+                  Start Free Trial
+                </motion.button>
+              </Link>
+              <Link href="/demo">
+                <motion.button
+                  className="px-8 py-4 bg-white/10 backdrop-blur-lg border border-white/20 text-white rounded-xl font-semibold text-lg hover:bg-white/20 transition-all"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  <h4 className="text-lg font-semibold text-white mb-2">Interaction Ecosystem</h4>
-                  <p className="text-gray-400 text-sm">Multi-channel communication hub</p>
-                </motion.div>
-              </div>
+                  View Live Demo
+                </motion.button>
+              </Link>
             </div>
           </motion.div>
-        )}
-      </AnimatePresence>
+        </div>
+      </section>
 
-      {/* Optimized footer */}
+      {/* Footer */}
       <motion.footer
-        className="bg-slate-900 py-12"
+        className="bg-black/80 backdrop-blur-lg border-t border-gray-800 py-12"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
       >
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-gray-400 mb-4">
-            © 2024 BSM Platform. Enterprise-grade service management solution.
-          </p>
-          <div className="flex justify-center space-x-6 text-sm text-gray-500">
-            <span>Privacy Policy</span>
-            <span>Terms of Service</span>
-            <span>Support</span>
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            <div>
+              <h3 className="text-white font-bold text-lg mb-4">BSM Platform</h3>
+              <p className="text-gray-400 mb-4">
+                Enterprise-grade business service management with AI-powered automation and real-time analytics.
+
+</p>
+            </div>
+            <div>
+              <h4 className="text-white font-semibold mb-4">Solutions</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li>IT Service Management</li>
+                <li>Customer Support</li>
+                <li>Workflow Automation</li>
+                <li>Performance Analytics</li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-white font-semibold mb-4">Resources</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li>Documentation</li>
+                <li>API Reference</li>
+                <li>Knowledge Base</li>
+                <li>Best Practices</li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-white font-semibold mb-4">Support</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li>24/7 Support</li>
+                <li>Training & Onboarding</li>
+                <li>Community Forum</li>
+                <li>Release Notes</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+            <p className="text-gray-400 mb-4 md:mb-0">
+              © 2024 BSM Platform. All rights reserved.
+            </p>
+            <div className="flex space-x-6 text-sm text-gray-500">
+              <span>Privacy Policy</span>
+              <span>Terms of Service</span>
+              <span>Cookie Settings</span>
+            </div>
           </div>
         </div>
       </motion.footer>
