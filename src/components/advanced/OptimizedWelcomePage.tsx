@@ -202,7 +202,7 @@ const MemoizedHeroSection = memo(({ onDemoMode, isDemoMode }: { onDemoMode: () =
                     whileHover={{ rotate: 5 }}
                     transition={{ type: "spring", stiffness: 400 }}
                   >
-                    <div className="w-16 h-velo-16 bg-gradient-to-br from-blue-400 to-cyan-400 rounded-2xl flex items-center justify-center">
+                    <div className="w-16 h-16 bg-gradient-to-br from-blue-400 to-cyan-400 rounded-2xl flex items-center justify-center">
                       <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -276,6 +276,7 @@ const MemoizedHeroSection = memo(({ onDemoMode, isDemoMode }: { onDemoMode: () =
 ))
 
 // Optimized statistics section
+// Enhanced Platform Service Showcase with Working Buttons
 const MemoizedStatsSection = memo(() => (
   <section className="py-20 bg-gradient-to-r from-slate-800 to-gray-900 relative overflow-hidden">
     {/* Optimized background pattern */}
@@ -296,64 +297,228 @@ const MemoizedStatsSection = memo(() => (
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
       >
-        <h2 className="text-4xl font-bold text-white mb-4">Platform Analytics</h2>
-        <p className="text-gray-400 text-lg">Real-time performance metrics</p>
+        <h2 className="text-4xl font-bold text-white mb-4">Platform Service Showcase</h2>
+        <p className="text-gray-400 text-lg">Interactive tools and real-time metrics</p>
       </motion.div>
 
+      {/* Interactive Service Buttons */}
+      <div className="flex flex-wrap justify-center gap-4 mb-12">
+        {['Dashboard', 'Analytics', 'Tickets', 'Reports', 'Settings'].map((service, index) => (
+          <motion.button
+            key={service}
+            className={`px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-300 ${
+              index === 0 
+                ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg shadow-blue-500/25' 
+                : 'bg-white/10 backdrop-blur-lg border border-white/20 text-gray-300 hover:bg-white/20'
+            }`}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: index * 0.1 }}
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            {service}
+          </motion.button>
+        ))}
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {/* Dynamic stats with optimized animations */}
+        {/* Interactive Service Cards */}
         <motion.div
-          className="bg-gradient-to-br from-blue-600/20 to-purple-600/20 backdrop-blur-lg border border-blue-500/30 rounded-2xl p-6 text-center"
+          className="bg-gradient-to-br from-blue-600/20 to-purple-600/20 backdrop-blur-lg border border-blue-500/30 rounded-2xl p-6 text-center cursor-pointer group"
           initial={{ opacity: 0, scale: 0.8 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          whileHover={{ y: -10 }}
+          whileHover={{ y: -10, scale: 1.02 }}
           style={{ willChange: 'transform' }}
         >
-          <div className="text-3xl font-bold text-blue-400 mb-2">1,247+</div>
-          <div className="text-gray-300">Active Tickets</div>
+          {/* Animated Chart */}
+          <div className="relative mb-4">
+            <div className="h-16 flex items-end justify-center space-x-2 mb-2">
+              {[65, 45, 80, 55, 90, 70, 85].map((height, index) => (
+                <motion.div
+                  key={index}
+                  className="bg-gradient-to-t from-blue-500 to-purple-400 rounded-t-md"
+                  style={{ width: '8px' }}
+                  initial={{ height: 0 }}
+                  animate={{ height: `${height}%` }}
+                  transition={{ duration: 0.8, delay: index * 0.1 }}
+                />
+              ))}
+            </div>
+            <div className="text-3xl font-bold text-blue-400 mb-2">1,247+</div>
+            <div className="text-gray-300">Active Tickets</div>
+          </div>
+          
+          <motion.button
+            className="w-full bg-gradient-to-r from-blue-500/50 to-purple-500/50 hover:from-blue-500 hover:to-purple-500 text-white py-2 rounded-lg text-sm font-medium transition-all duration-300"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            View Details →
+          </motion.button>
         </motion.div>
 
         <motion.div
-          className="bg-gradient-to-br from-green-600/20 to-teal-600/20 backdrop-blur-lg border border-green-500/30 rounded-2xl p-6 text-center"
+          className="bg-gradient-to-br from-green-600/20 to-teal-600/20 backdrop-blur-lg border border-green-500/30 rounded-2xl p-6 text-center cursor-pointer group"
           initial={{ opacity: 0, scale: 0.8 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          whileHover={{ y: -10 }}
+          whileHover={{ y: -10, scale: 1.02 }}
           style={{ willChange: 'transform' }}
         >
-          <div className="text-3xl font-bold text-green-400 mb-2">94.2%</div>
-          <div className="text-gray-300">Resolution Rate</div>
+          {/* Circular Progress Chart */}
+          <div className="relative mb-4">
+            <div className="w-16 h-16 mx-auto mb-3">
+              <svg className="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+                <path
+                  className="text-green-600/30"
+                  strokeLinecap="round"
+                  strokeWidth="2"
+                  stroke="currentColor"
+                  d="M18 2.0845a 15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0 -31.831"
+                />
+                <motion.path
+                  className="text-green-400"
+                  strokeLinecap="round"
+                  strokeWidth="2"
+                  stroke="currentColor"
+                  d="M18 2.0845a 15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0 -31.831"
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: 0.942 }}
+                  transition={{ duration: 1.5, delay: 0.5 }}
+                />
+              </svg>
+              <div className="absolute inset-0 flex items-center justify-center text-green-400 font-bold text-sm">
+                94.2%
+              </div>
+            </div>
+            <div className="text-gray-300">Resolution Rate</div>
+          </div>
+          
+          <motion.button
+            className="w-full bg-gradient-to-r from-green-500/50 to-teal-500/50 hover:from-green-500 hover:to-teal-500 text-white py-2 rounded-lg text-sm font-medium transition-all duration-300"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            View Details →
+          </motion.button>
         </motion.div>
 
         <motion.div
-          className="bg-gradient-to-br from-purple-600/20 to-pink-600/20 backdrop-blur-lg border border-purple-500/30 rounded-2xl p-6 text-center"
+          className="bg-gradient-to-br from-purple-600/20 to-pink-600/20 backdrop-blur-lg border border-purple-500/30 rounded-2xl p-6 text-center cursor-pointer group"
           initial={{ opacity: 0, scale: 0.8 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          whileHover={{ y: -10 }}
+          whileHover={{ y: -10, scale: 1.02 }}
           style={{ willChange: 'transform' }}
         >
-          <div className="text-3xl font-bold text-purple-400 mb-2">892</div>
-          <div className="text-gray-300">Knowledge Articles</div>
+          {/* Animated Line Chart */}
+          <div className="relative mb-4">
+            <div className="h-16 flex items-end justify-center mb-3">
+              <svg className="w-full h-full">
+                <motion.path
+                  d="M0,50 Q25,20 50,40 T100,30"
+                  stroke="url(#purpleGradient)"
+                  strokeWidth="3"
+                  fill="none"
+                  initial={{ pathLength: 0, opacity: 0 }}
+                  animate={{ pathLength: 1, opacity: 1 }}
+                  transition={{ duration: 1.5, delay: 0.3 }}
+                />
+                <defs>
+                  <linearGradient id="purpleGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#a855f7" />
+                    <stop offset="100%" stopColor="#ec4899" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+            <div className="text-3xl font-bold text-purple-400 mb-2">892</div>
+            <div className="text-gray-300">Knowledge Articles</div>
+          </div>
+          
+          <motion.button
+            className="w-full bg-gradient-to-r from-purple-500/50 to-pink-500/50 hover:from-purple-500 hover:to-pink-500 text-white py-2 rounded-lg text-sm font-medium transition-all duration-300"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            View Details →
+          </motion.button>
         </motion.div>
 
         <motion.div
-          className="bg-gradient-to-br from-orange-600/20 to-red-600/20 backdrop-blur-lg border border-orange-500/30 rounded-2xl p-6 text-center"
+          className="bg-gradient-to-br from-orange-600/20 to-red-600/20 backdrop-blur-lg border border-orange-500/30 rounded-2xl p-6 text-center cursor-pointer group"
           initial={{ opacity: 0, scale: 0.8 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          whileHover={{ y: -10 }}
+          whileHover={{ y: -10, scale: 1.02 }}
           style={{ willChange: 'transform' }}
         >
-          <div className="text-3xl font-bold text-orange-400 mb-2">24/7</div>
-          <div className="text-gray-300">Support Available</div>
+          {/* Pulse Animation */}
+          <div className="relative mb-4">
+            <motion.div
+              className="w-16 h-16 bg-gradient-to-br from-orange-400 to-red-500 rounded-full mx-auto mb-3 flex items-center justify-center"
+              animate={{ scale: [1, 1.2, 1], opacity: [1, 0.8, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              <span className="text-white text-xl">🔄</span>
+            </motion.div>
+            <div className="text-3xl font-bold text-orange-400 mb-2">24/7</div>
+            <div className="text-gray-300">Support Available</div>
+          </div>
+          
+          <motion.button
+            className="w-full bg-gradient-to-r from-orange-500/50 to-red-500/50 hover:from-orange-500 hover:to-red-500 text-white py-2 rounded-lg text-sm font-medium transition-all duration-300"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            View Details →
+          </motion.button>
         </motion.div>
       </div>
+
+      {/* Quick Actions */}
+      <motion.div
+        className="flex flex-wrap justify-center gap-4 mt-12"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, delay: 0.6 }}
+      >
+        <Link href="/admin/dashboard">
+          <motion.button
+            className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-blue-500/25"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            🚀 Access Admin Dashboard
+          </motion.button>
+        </Link>
+        <Link href="/customer/dashboard">
+          <motion.button
+            className="px-6 py-3 bg-gradient-to-r from-green-500 to-teal-600 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-green-500/25"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            👥 Customer Portal
+          </motion.button>
+        </Link>
+        <Link href="/auth/login">
+          <motion.button
+            className="px-6 py-3 bg-white/10 backdrop-blur-lg border border-white/20 text-white rounded-lg font-semibold hover:bg-white/25"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            🔐 Login
+          </motion.button>
+        </Link>
+      </motion.div>
     </div>
   </section>
 ))
