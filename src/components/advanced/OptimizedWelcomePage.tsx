@@ -279,6 +279,7 @@ const MemoizedHeroSection = memo(({ onDemoMode, isDemoMode }: { onDemoMode: () =
 export function OptimizedWelcomePage() {
   const [isLoading, setIsLoading] = useState(true)
   const [isDemoMode, setIsDemoMode] = useState(false)
+  const [selectedFilter, setSelectedFilter] = useState('All')
 
   // Mock data for better performance (no Supabase calls)
   const mockData = {
@@ -406,27 +407,22 @@ export function OptimizedWelcomePage() {
           {/* Service Cards */}
           {/* Filter Buttons */}
           <div className="flex flex-wrap justify-center gap-3 mb-12">
-            <button className="px-5 py-2 bg-gradient-to-r from-violet-500 to-purple-600 text-white rounded-full text-sm font-medium hover:shadow-lg hover:scale-105 transition-all duration-75">
-              All
-            </button>
-            <button className="px-5 py-2 bg-white/10 backdrop-blur-lg border border-white/20 text-gray-300 rounded-full text-sm font-medium hover:bg-white/20 hover:scale-105 transition-all duration-75">
-              Dashboard
-            </button>
-            <button className="px-5 py-2 bg-white/10 backdrop-blur-lg border border-white/20 text-gray-300 rounded-full text-sm font-medium hover:bg-white/20 hover:scale-105 transition-all duration-75">
-              Portal
-            </button>
-            <button className="px-5 py-2 bg-white/10 backdrop-blur-lg border border-white/20 text-gray-300 rounded-full text-sm font-medium hover:bg-white/20 hover:scale-105 transition-all duration-75">
-              Analytics
-            </button>
-            <button className="px-5 py-2 bg-white/10 backdrop-blur-lg border border-white/20 text-gray-300 rounded-full text-sm font-medium hover:bg-white/20 hover:scale-105 transition-all duration-75">
-              Admin
-            </button>
-            <button className="px-5 py-2 bg-white/10 backdrop-blur-lg border border-white/20 text-gray-300 rounded-full text-sm font-medium hover:bg-white/20 hover:scale-105 transition-all duration-75">
-              Workflow
-            </button>
+            {['All', 'Dashboard', 'Portal', 'Analytics', 'Admin', 'Workflow'].map((filter) => (
+              <button 
+                key={filter}
+                onClick={() => setSelectedFilter(filter)}
+                className={`px-5 py-2 rounded-full text-sm font-medium hover:shadow-lg hover:scale-105 transition-all duration-75 ${
+                  selectedFilter === filter 
+                    ? 'bg-gradient-to-r from-violet-500 to-purple-600 text-white' 
+                    : 'bg-white/10 backdrop-blur-lg border border-white/20 text-gray-300 hover:bg-white/20'
+                }`}
+              >
+                {filter}
+              </button>
+            ))}
           </div>
 
-          {/* Service Cards Grid - Quick 3D Hover */}
+          {/* Service Cards Grid - Quick 3D Hover with Working Filter */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* Dashboard Overview Card */}
             <div className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 cursor-pointer transition-all duration-75 transform hover:scale-105 hover:-translate-y-1 hover:shadow-2xl hover:shadow-blue-500/20 hover:border-blue-400/50">
@@ -445,7 +441,10 @@ export function OptimizedWelcomePage() {
                   <span>👁️ 128</span>
                 </div>
               </div>
-              <button className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-2 rounded-lg text-sm font-medium hover:shadow-lg hover:scale-105 transition-all duration-75">
+              <button 
+                onClick={() => window.open('/admin/dashboard', '_blank')}
+                className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-2 rounded-lg text-sm font-medium hover:shadow-lg hover:scale-105 transition-all duration-75"
+              >
                 View Details →
               </button>
             </div>
@@ -467,7 +466,10 @@ export function OptimizedWelcomePage() {
                   <span>👁️ 95</span>
                </div>
               </div>
-              <button className="w-full bg-gradient-to-r from-purple-500 to-pink-600 text-white py-2 rounded-lg text-sm font-medium hover:shadow-lg hover:scale-105 transition-all duration-75">
+              <button 
+                onClick={() => window.open('/customer/dashboard', '_blank')}
+                className="w-full bg-gradient-to-r from-purple-500 to-pink-600 text-white py-2 rounded-lg text-sm font-medium hover:shadow-lg hover:scale-105 transition-all duration-75"
+              >
                 View Details →
               </button>
             </div>
@@ -489,7 +491,10 @@ export function OptimizedWelcomePage() {
                   <span>👁️ 203</span>
                 </div>
               </div>
-              <button className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-2 rounded-lg text-sm font-medium hover:shadow-lg hover:scale-105 transition-all duration-75">
+              <button 
+                onClick={() => alert('Analytics Dashboard - Coming Soon!')}
+                className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-2 rounded-lg text-sm font-medium hover:shadow-lg hover:scale-105 transition-all duration-75"
+              >
                 View Details →
               </button>
             </div>
@@ -511,7 +516,10 @@ export function OptimizedWelcomePage() {
                   <span>👁️ 87</span>
                 </div>
               </div>
-              <button className="w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white py-2 rounded-lg text-sm font-medium hover:shadow-lg hover:scale-105 transition-all duration-75">
+              <button 
+                onClick={() => alert('Mobile Interface - Coming Soon!')}
+                className="w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white py-2 rounded-lg text-sm font-medium hover:shadow-lg hover:scale-105 transition-all duration-75"
+              >
                 View Details →
               </button>
             </div>
@@ -533,7 +541,10 @@ export function OptimizedWelcomePage() {
                   <span>👁️ 156</span>
                 </div>
               </div>
-              <button className="w-full bg-gradient-to-r from-violet-500 to-purple-600 text-white py-2 rounded-lg text-sm font-medium hover:shadow-lg hover:scale-105 transition-all duration-75">
+              <button 
+                onClick={() => window.open('/admin/dashboard', '_blank')}
+                className="w-full bg-gradient-to-r from-violet-500 to-purple-600 text-white py-2 rounded-lg text-sm font-medium hover:shadow-lg hover:scale-105 transition-all duration-75"
+              >
                 View Details →
               </button>
             </div>
@@ -555,7 +566,10 @@ export function OptimizedWelcomePage() {
                   <span>👁️ 189</span>
                 </div>
               </div>
-              <button className="w-full bg-gradient-to-r from-indigo-500 to-blue-600 text-white py-2 rounded-lg text-sm font-medium hover:shadow-lg hover:scale-105 transition-all duration-75">
+              <button 
+                onClick={() => alert('Workflow Builder - Coming Soon!')}
+                className="w-full bg-gradient-to-r from-indigo-500 to-blue-600 text-white py-2 rounded-lg text-sm font-medium hover:shadow-lg hover:scale-105 transition-all duration-75"
+              >
                 View Details →
               </button>
             </div>
