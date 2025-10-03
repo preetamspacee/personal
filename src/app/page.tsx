@@ -1,12 +1,12 @@
 import dynamic from 'next/dynamic'
 
-// Dynamically import the optimized welcome page for better performance
-const OptimizedWelcomePage = dynamic(() => import('@/components/advanced/OptimizedWelcomePage').then(m => ({ default: m.OptimizedWelcomePage })), {
+// Dynamically import the ultra-fast welcome page for maximum performance
+const LightningFastWelcomePage = dynamic(() => import('@/components/advanced/LightingFastWelcomePage').then(m => ({ default: m.LightningFastWelcomePage })), {
   loading: () => (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#f9fafc] to-[#eef3ff]">
       <div className="text-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary mx-auto mb-4"></div>
-        <p className="text-gray-400">Loading BSM Platform...</p>
+        <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-indigo-500 mx-auto mb-4"></div>
+        <p className="text-gray-600">Loading BSM Platform...</p>
       </div>
     </div>
   ),
@@ -14,5 +14,5 @@ const OptimizedWelcomePage = dynamic(() => import('@/components/advanced/Optimiz
 })
 
 export default function Home() {
-  return <OptimizedWelcomePage />
+  return <LightningFastWelcomePage />
 }
