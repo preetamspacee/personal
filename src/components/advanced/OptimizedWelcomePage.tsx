@@ -10,7 +10,6 @@ import { OptimizedQuantumBackground } from './OptimizedQuantumBackground'
 import { DataVisualization } from './DataVisualization'
 import { ImmersiveHero } from './ImmersiveHero'
 import { InteractionEcosystem } from './InteractionEcosystem'
-import { PhotoBoard } from './PhotoBoard'
 import { MorphingNavigation } from './MorphingNavigation'
 
 // Types for dynamic data
@@ -636,7 +635,6 @@ export function OptimizedWelcomePage() {
             </p>
           </motion.div>
           
-          <PhotoBoard />
         </div>
       </section>
 
