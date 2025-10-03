@@ -404,39 +404,158 @@ export function OptimizedWelcomePage() {
           </motion.div>
 
           {/* Service Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {/* Active Tickets Card */}
-            <div className="bg-gradient-to-br from-blue-600/20 to-purple-600/20 backdrop-blur-lg border border-blue-500/30 rounded-2xl p-6 text-center hover:scale-105 hover:-translate-y-2 transition-all duration-200">
-              <div className="text-3xl font-bold text-blue-400 mb-2">1,247+</div>
-              <div className="text-gray-300 mb-4">Active Tickets</div>
-              <button className="w-full bg-gradient-to-r from-blue-500/50 to-purple-500/50 hover:from-blue-500 hover:to-purple-500 text-white py-2 rounded-lg text-sm font-medium transition-all duration-150 hover:scale-105">
+          {/* Filter Buttons */}
+          <div className="flex flex-wrap justify-center gap-3 mb-12">
+            <button className="px-5 py-2 bg-gradient-to-r from-violet-500 to-purple-600 text-white rounded-full text-sm font-medium hover:shadow-lg hover:scale-105 transition-all duration-75">
+              All
+            </button>
+            <button className="px-5 py-2 bg-white/10 backdrop-blur-lg border border-white/20 text-gray-300 rounded-full text-sm font-medium hover:bg-white/20 hover:scale-105 transition-all duration-75">
+              Dashboard
+            </button>
+            <button className="px-5 py-2 bg-white/10 backdrop-blur-lg border border-white/20 text-gray-300 rounded-full text-sm font-medium hover:bg-white/20 hover:scale-105 transition-all duration-75">
+              Portal
+            </button>
+            <button className="px-5 py-2 bg-white/10 backdrop-blur-lg border border-white/20 text-gray-300 rounded-full text-sm font-medium hover:bg-white/20 hover:scale-105 transition-all duration-75">
+              Analytics
+            </button>
+            <button className="px-5 py-2 bg-white/10 backdrop-blur-lg border border-white/20 text-gray-300 rounded-full text-sm font-medium hover:bg-white/20 hover:scale-105 transition-all duration-75">
+              Admin
+            </button>
+            <button className="px-5 py-2 bg-white/10 backdrop-blur-lg border border-white/20 text-gray-300 rounded-full text-sm font-medium hover:bg-white/20 hover:scale-105 transition-all duration-75">
+              Workflow
+            </button>
+          </div>
+
+          {/* Service Cards Grid - Quick 3D Hover */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Dashboard Overview Card */}
+            <div className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 cursor-pointer transition-all duration-75 transform hover:scale-105 hover:-translate-y-1 hover:shadow-2xl hover:shadow-blue-500/20 hover:border-blue-400/50">
+              <div className="flex justify-between items-start mb-4">
+                <span className="px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-medium rounded-full">Dashboard</span>
+                <span>❤️</span>
+              </div>
+              <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-xl flex items-center justify-center">
+                <span>📊</span>
+              </div>
+              <h3 className="text-xl font-semibold text-white mb-2">Dashboard Overview</h3>
+              <p className="text-gray-400 text-sm mb-4">Main dashboard showing real-time analytics and key metrics</p>
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center space-x-3 text-gray-400 text-sm">
+                  <span>❤️ 42</span>
+                  <span>👁️ 128</span>
+                </div>
+              </div>
+              <button className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-2 rounded-lg text-sm font-medium hover:shadow-lg hover:scale-105 transition-all duration-75">
                 View Details →
               </button>
             </div>
 
-            {/* Resolution Rate Card */}
-            <div className="bg-gradient-to-br from-green-600/20 to-teal-600/20 backdrop-blur-lg border border-green-500/30 rounded-2xl p-6 text-center hover:scale-105 hover:-translate-y-2 transition-all duration-200">
-              <div className="text-3xl font-bold text-green-400 mb-2">94.2%</div>
-              <div className="text-gray-300 mb-4">Resolution Rate</div>
-              <button className="w-full bg-gradient-to-r from-green-500/50 to-teal-500/50 hover:from-green-500 hover:to-teal-500 text-white py-2 rounded-lg text-sm font-medium transition-all duration-150 hover:scale-105">
+            {/* Customer Portal Card */}
+            <div className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 cursor-pointer transition-all duration-75 transform hover:scale-105 hover:-translate-y-1 hover:shadow-2xl hover:shadow-purple-500/20 hover:border-purple-400/50">
+              <div className="flex justify-between items-start mb-4">
+                <span className="px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-medium rounded-full">Portal</span>
+                <span>❤️</span>
+              </div>
+              <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-xl flex items-center justify-center">
+                <span>👥</span>
+              </div>
+              <h3 className="text-xl font-semibold text-white mb-2">Customer Portal</h3>
+              <p className="text-gray-400 text-sm mb-4">User-friendly interface for customer interactions</p>
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center space-x-3 text-gray-400 text-sm">
+                  <span>❤️ 38</span>
+                  <span>👁️ 95</span>
+               </div>
+              </div>
+              <button className="w-full bg-gradient-to-r from-purple-500 to-pink-600 text-white py-2 rounded-lg text-sm font-medium hover:shadow-lg hover:scale-105 transition-all duration-75">
                 View Details →
               </button>
             </div>
 
-            {/* Knowledge Articles Card */}
-            <div className="bg-gradient-to-br from-purple-600/20 to-pink-600/20 backdrop-blur-lg border border-purple-500/30 rounded-2xl p-6 text-center hover:scale-105 hover:-translate-y-2 transition-all duration-200">
-              <div className="text-3xl font-bold text-purple-400 mb-2">892</div>
-              <div className="text-gray-300 mb-4">Knowledge Articles</div>
-              <button className="w-full bg-gradient-to-r from-purple-500/50 to-pink-500/50 hover:from-purple-500 hover:to-pink-500 text-white py-2 rounded-lg text-sm font-medium transition-all duration-150 hover:scale-105">
+            {/* Analytics Dashboard Card */}
+            <div className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 cursor-pointer transition-all duration-75 transform hover:scale-105 hover:-translate-y-1 hover:shadow-2xl hover:shadow-cyan-500/20 hover:border-cyan-400/50">
+              <div className="flex justify-between items-start mb-4">
+                <span className="px-3 py-1 bg-cyan-500/20 text-cyan-400 text-xs font-medium rounded-full">Analytics</span>
+                <span>❤️</span>
+              </div>
+              <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-xl flex items-center justify-center">
+                <span>📈</span>
+              </div>
+              <h3 className="text-xl font-semibold text-white mb-2">Analytics Dashboard</h3>
+              <p className="text-gray-400 text-sm mb-4">Advanced data visualization and reporting tools</p>
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center space-x-3 text-gray-400 text-sm">
+                  <span>❤️ 56</span>
+                  <span>👁️ 203</span>
+                </div>
+              </div>
+              <button className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-2 rounded-lg text-sm font-medium hover:shadow-lg hover:scale-105 transition-all duration-75">
                 View Details →
               </button>
             </div>
 
-            {/* Support Card */}
-            <div className="bg-gradient-to-br from-orange-600/20 to-red-600/20 backdrop-blur-lg border border-orange-500/30 rounded-2xl p-6 text-center hover:scale-105 hover:-translate-y-2 transition-all duration-200">
-              <div className="text-3xl font-bold text-orange-400 mb-2">24/7</div>
-              <div className="text-gray-300 mb-4">Support Available</div>
-              <button className="w-full bg-gradient-to-r from-orange-500/50 to-red-500/50 hover:from-orange-500 hover:to-red-500 text-white py-2 rounded-lg text-sm font-medium transition-all duration-150 hover:scale-105">
+            {/* Mobile Interface Card */}
+            <div className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 cursor-pointer transition-all duration-75 transform hover:scale-105 hover:-translate-y-1 hover:shadow-2xl hover:shadow-emerald-500/20 hover:border-emerald-400/50">
+              <div className="flex justify-between items-start mb-4">
+                <span className="px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-medium rounded-full">Mobile</span>
+                <span>❤️</span>
+              </div>
+              <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-emerald-500/20 to-teal-500/20 rounded-xl flex items-center justify-center">
+                <span>📱</span>
+              </div>
+              <h3 className="text-xl font-semibold text-white mb-2">Mobile Interface</h3>
+              <p className="text-gray-400 text-sm mb-4">Responsive design for mobile devices</p>
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center space-x-3 text-gray-400 text-sm">
+                  <span>❤️ 29</span>
+                  <span>👁️ 87</span>
+                </div>
+              </div>
+              <button className="w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white py-2 rounded-lg text-sm font-medium hover:shadow-lg hover:scale-105 transition-all duration-75">
+                View Details →
+              </button>
+            </div>
+
+            {/* Admin Panel Card */}
+            <div className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 cursor-pointer transition-all duration-75 transform hover:scale-105 hover:-translate-y-1 hover:shadow-2xl hover:shadow-violet-500/20 hover:border-violet-400/50">
+              <div className="flex justify-between items-start mb-4">
+                <span className="px-3 py-1 bg-violet-500/20 text-violet-400 text-xs font-medium rounded-full">Admin</span>
+                <span>❤️</span>
+              </div>
+              <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-violet-500/20 to-purple-500/20 rounded-xl flex items-center justify-center">
+                <span>⚙️</span>
+              </div>
+              <h3 className="text-xl font-semibold text-white mb-2">Admin Panel</h3>
+              <p className="text-gray-400 text-sm mb-4">Comprehensive admin controls and settings</p>
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center space-x-3 text-gray-400 text-sm">
+                  <span>❤️ 67</span>
+                  <span>👁️ 156</span>
+                </div>
+              </div>
+              <button className="w-full bg-gradient-to-r from-violet-500 to-purple-600 text-white py-2 rounded-lg text-sm font-medium hover:shadow-lg hover:scale-105 transition-all duration-75">
+                View Details →
+              </button>
+            </div>
+
+            {/* Workflow Builder Card */}
+            <div className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 cursor-pointer transition-all duration-75 transform hover:scale-105 hover:-translate-y-1 hover:shadow-2xl hover:shadow-indigo-500/20 hover:border-indigo-400/50">
+              <div className="flex justify-between items-start mb-4">
+                <span className="px-3 py-1 bg-indigo-500/20 text-indigo-400 text-xs font-medium rounded-full">Workflow</span>
+                <span>❤️</span>
+              </div>
+              <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-indigo-500/20 to-blue-500/20 rounded-xl flex items-center justify-center">
+                <span>🔧</span>
+              </div>
+              <h3 className="text-xl font-semibold text-white mb-2">Workflow Builder</h3>
+              <p className="text-gray-400 text-sm mb-4">Visual workflow creation and automation tools</p>
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center space-x-3 text-gray-400 text-sm">
+                  <span>❤️ 73</span>
+                  <span>👁️ 189</span>
+                </div>
+              </div>
+              <button className="w-full bg-gradient-to-r from-indigo-500 to-blue-600 text-white py-2 rounded-lg text-sm font-medium hover:shadow-lg hover:scale-105 transition-all duration-75">
                 View Details →
               </button>
             </div>
