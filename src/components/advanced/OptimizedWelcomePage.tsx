@@ -275,7 +275,6 @@ const MemoizedHeroSection = memo(({ onDemoMode, isDemoMode }: { onDemoMode: () =
   </section>
 ))
 
-// Optimized statistics section
 // Enhanced Platform Service Showcase with Working Buttons
 const MemoizedStatsSection = memo(() => (
   <section className="py-20 bg-gradient-to-r from-slate-800 to-gray-900 relative overflow-hidden">
@@ -301,38 +300,26 @@ const MemoizedStatsSection = memo(() => (
         <p className="text-gray-400 text-lg">Interactive tools and real-time metrics</p>
       </motion.div>
 
-      {/* Interactive Service Buttons */}
+      {/* Interactive Service Buttons - Optimized */}
       <div className="flex flex-wrap justify-center gap-4 mb-12">
         {['Dashboard', 'Analytics', 'Tickets', 'Reports', 'Settings'].map((service, index) => (
-          <motion.button
+          <button
             key={service}
-            className={`px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-300 ${
+            className={`px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-150 ${
               index === 0 
                 ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg shadow-blue-500/25' 
-                : 'bg-white/10 backdrop-blur-lg border border-white/20 text-gray-300 hover:bg-white/20'
+                : 'bg-white/10 backdrop-blur-lg border border-white/20 text-gray-300 hover:bg-white/20 hover:scale-105'
             }`}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: index * 0.1 }}
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
           >
             {service}
-          </motion.button>
+          </button>
         ))}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {/* Interactive Service Cards */}
-        <motion.div
-          className="bg-gradient-to-br from-blue-600/20 to-purple-600/20 backdrop-blur-lg border border-blue-500/30 rounded-2xl p-6 text-center cursor-pointer group"
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          whileHover={{ y: -10, scale: 1.02 }}
-          style={{ willChange: 'transform' }}
+        {/* Interactive Service Cards - Static */}
+        <div
+          className="bg-gradient-to-br from-blue-600/20 to-purple-600/20 backdrop-blur-lg border border-blue-500/30 rounded-2xl p-6 text-center cursor-pointer group hover:scale-105 hover:-translate-y-2 transition-all duration-200"
         >
           {/* Animated Chart */}
           <div className="relative mb-4">
@@ -352,23 +339,15 @@ const MemoizedStatsSection = memo(() => (
             <div className="text-gray-300">Active Tickets</div>
           </div>
           
-          <motion.button
-            className="w-full bg-gradient-to-r from-blue-500/50 to-purple-500/50 hover:from-blue-500 hover:to-purple-500 text-white py-2 rounded-lg text-sm font-medium transition-all duration-300"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+          <button
+            className="w-full bg-gradient-to-r from-blue-500/50 to-purple-500/50 hover:from-blue-500 hover:to-purple-500 text-white py-2 rounded-lg text-sm font-medium transition-all duration-150 hover:scale-105"
           >
             View Details →
-          </motion.button>
+          </button>
         </motion.div>
 
-        <motion.div
-          className="bg-gradient-to-br from-green-600/20 to-teal-600/20 backdrop-blur-lg border border-green-500/30 rounded-2xl p-6 text-center cursor-pointer group"
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          whileHover={{ y: -10, scale: 1.02 }}
-          style={{ willChange: 'transform' }}
+        <div
+          className="bg-gradient-to-br from-green-600/20 to-teal-600/20 backdrop-blur-lg border border-green-500/30 rounded-2xl p-6 text-center cursor-pointer group hover:scale-105 hover:-translate-y-2 transition-all duration-200"
         >
           {/* Circular Progress Chart */}
           <div className="relative mb-4">
@@ -399,23 +378,15 @@ const MemoizedStatsSection = memo(() => (
             <div className="text-gray-300">Resolution Rate</div>
           </div>
           
-          <motion.button
-            className="w-full bg-gradient-to-r from-green-500/50 to-teal-500/50 hover:from-green-500 hover:to-teal-500 text-white py-2 rounded-lg text-sm font-medium transition-all duration-300"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+          <button
+            className="w-full bg-gradient-to-r from-green-500/50 to-teal-500/50 hover:from-green-500 hover:to-teal-500 text-white py-2 rounded-lg text-sm font-medium transition-all duration-150 hover:scale-105"
           >
             View Details →
-          </motion.button>
+          </button>
         </motion.div>
 
-        <motion.div
-          className="bg-gradient-to-br from-purple-600/20 to-pink-600/20 backdrop-blur-lg border border-purple-500/30 rounded-2xl p-6 text-center cursor-pointer group"
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          whileHover={{ y: -10, scale: 1.02 }}
-          style={{ willChange: 'transform' }}
+        <div
+          className="bg-gradient-to-br from-purple-600/20 to-pink-600/20 backdrop-blur-lg border border-purple-500/30 rounded-2xl p-6 text-center cursor-pointer group hover:scale-105 hover:-translate-y-2 transition-all duration-200"
         >
           {/* Animated Line Chart */}
           <div className="relative mb-4">
@@ -442,23 +413,15 @@ const MemoizedStatsSection = memo(() => (
             <div className="text-gray-300">Knowledge Articles</div>
           </div>
           
-          <motion.button
-            className="w-full bg-gradient-to-r from-purple-500/50 to-pink-500/50 hover:from-purple-500 hover:to-pink-500 text-white py-2 rounded-lg text-sm font-medium transition-all duration-300"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+          <button
+            className="w-full bg-gradient-to-r from-purple-500/50 to-pink-500/50 hover:from-purple-500 hover:to-pink-500 text-white py-2 rounded-lg text-sm font-medium transition-all duration-150 hover:scale-105"
           >
             View Details →
-          </motion.button>
+          </button>
         </motion.div>
 
-        <motion.div
-          className="bg-gradient-to-br from-orange-600/20 to-red-600/20 backdrop-blur-lg border border-orange-500/30 rounded-2xl p-6 text-center cursor-pointer group"
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          whileHover={{ y: -10, scale: 1.02 }}
-          style={{ willChange: 'transform' }}
+        <div
+          className="bg-gradient-to-br from-orange-600/20 to-red-600/20 backdrop-blur-lg border border-orange-500/30 rounded-2xl p-6 text-center cursor-pointer group hover:scale-105 hover:-translate-y-2 transition-all duration-200"
         >
           {/* Pulse Animation */}
           <div className="relative mb-4">
@@ -473,52 +436,38 @@ const MemoizedStatsSection = memo(() => (
             <div className="text-gray-300">Support Available</div>
           </div>
           
-          <motion.button
-            className="w-full bg-gradient-to-r from-orange-500/50 to-red-500/50 hover:from-orange-500 hover:to-red-500 text-white py-2 rounded-lg text-sm font-medium transition-all duration-300"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+          <button
+            className="w-full bg-gradient-to-r from-orange-500/50 to-red-500/50 hover:from-orange-500 hover:to-red-500 text-white py-2 rounded-lg text-sm font-medium transition-all duration-150 hover:scale-105"
           >
             View Details →
-          </motion.button>
+          </button>
         </motion.div>
       </div>
 
-      {/* Quick Actions */}
-      <motion.div
-        className="flex flex-wrap justify-center gap-4 mt-12"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, delay: 0.6 }}
-      >
+      {/* Quick Actions - Static */}
+      <div className="flex flex-wrap justify-center gap-4 mt-12">
         <Link href="/admin/dashboard">
-          <motion.button
-            className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-blue-500/25"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          <button
+            className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-blue-500/25 hover:scale-105 transition-all duration-150"
           >
             🚀 Access Admin Dashboard
-          </motion.button>
+          </button>
         </Link>
         <Link href="/customer/dashboard">
-          <motion.button
-            className="px-6 py-3 bg-gradient-to-r from-green-500 to-teal-600 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-green-500/25"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          <button
+            className="px-6 py-3 bg-gradient-to-r from-green-500 to-teal-600 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-green-500/25 hover:scale-105 transition-all duration-150"
           >
             👥 Customer Portal
-          </motion.button>
+          </button>
         </Link>
         <Link href="/auth/login">
-          <motion.button
-            className="px-6 py-3 bg-white/10 backdrop-blur-lg border border-white/20 text-white rounded-lg font-semibold hover:bg-white/25"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          <button
+            className="px-6 py-3 bg-white/10 backdrop-blur-lg border border-white/20 text-white rounded-lg font-semibold hover:bg-white/25 hover:scale-105 transition-all duration-150"
           >
             🔐 Login
-          </motion.button>
+          </button>
         </Link>
-      </motion.div>
+      </div>
     </div>
   </section>
 ))
