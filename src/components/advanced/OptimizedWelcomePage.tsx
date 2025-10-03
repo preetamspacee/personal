@@ -37,15 +37,18 @@ const MemoizedHeroSection = memo(({ onDemoMode, isDemoMode }: { onDemoMode: () =
   <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
     {/* Light Mode Background */}
     <div 
-      className="absolute inset-0 dark:bg-gradient-to-br dark:from-slate-900 dark:via-purple-900 dark:to-slate-900 bg-gradient-to-b from-[#f9fafb] to-[#e5e7eb]"
+      className="absolute inset-0 dark:bg-gradient-to-br dark:from-slate-900 dark:via-purple-900 dark:to-slate-900 bg-gradient-to-b from-[#f9fafc] to-[#eef3ff]"
       style={{ 
         willChange: 'transform',
         transform: 'translateZ(0)', // Force GPU acceleration
       }}
     />
     
+    {/* Premium Light Mode Glassmorphism Overlay */}
+    <div className="absolute inset-0 dark:hidden bg-gradient-to-br from-white/30 via-transparent to-blue-50/20 backdrop-blur-xl"></div>
+    
     {/* Light Mode Radial Lighting */}
-    <div className="absolute inset-0 dark:hidden bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.08),transparent_70%)]"></div>
+    <div className="absolute inset-0 dark:hidden bg-[radial-gradient(circle_at_center,rgba(79,70,229,0.12),transparent_70%)]"></div>
     
     {/* Optimized QuantumBackground */}
     <OptimizedQuantumBackground />
@@ -111,7 +114,7 @@ const MemoizedHeroSection = memo(({ onDemoMode, isDemoMode }: { onDemoMode: () =
 
           {/* Animated title */}
           <motion.h1
-            className="text-6xl md:text-8xl font-bold dark:text-white dark:bg-gradient-to-r dark:from-cyan-400 dark:via-purple-500 dark:to-cyan-400 dark:bg-clip-text dark:text-transparent text-gray-900 mb-6"
+            className="text-6xl md:text-8xl font-bold dark:text-white dark:bg-gradient-to-r dark:from-cyan-400 dark:via-purple-500 dark:to-cyan-400 dark:bg-clip-text dark:text-transparent text-[#1a1a1a] mb-6"
             style={{
               backgroundSize: '200% 100%',
               willChange: 'background-position'
@@ -129,7 +132,7 @@ const MemoizedHeroSection = memo(({ onDemoMode, isDemoMode }: { onDemoMode: () =
           </motion.h1>
 
           <motion.p
-            className="text-xl dark:text-gray-300 text-gray-600 mb-4 opacity-0"
+            className="text-xl dark:text-gray-300 text-[#4b5563] mb-4 opacity-0"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1, duration: 0.6 }}
@@ -164,12 +167,12 @@ const MemoizedHeroSection = memo(({ onDemoMode, isDemoMode }: { onDemoMode: () =
             animate={{ opacity: 1 }}
             transition={{ delay: 2.5, duration: 0.6 }}
           >
-            <span className="text-sm dark:text-gray-400 text-gray-600">Demo Mode:</span>
+            <span className="text-sm dark:text-gray-400 text-[#4b5563]">Demo Mode:</span>
             <motion.button
               className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                 isDemoMode 
-                  ? 'bg-gradient-to-r from-[#6366f1] to-[#3b82f6] text-white shadow-[0_0_15px_#6366f166] hover:shadow-[0_0_25px_#6366f188]' 
-                  : 'dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 bg-white border border-gray-300 text-gray-700 hover:border-gray-400'
+                  ? 'bg-gradient-to-r from-[#4f46e5] to-[#0ea5e9] text-white shadow-lg hover:shadow-xl ring-1 ring-white/20' 
+                  : 'dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 bg-white/70 backdrop-blur-md border border-white/30 text-[#4b5563] hover:bg-white/90 hover:border-white/50'
               }`}
               onClick={onDemoMode}
               whileHover={{ scale: 1.05 }}
@@ -194,7 +197,7 @@ const MemoizedHeroSection = memo(({ onDemoMode, isDemoMode }: { onDemoMode: () =
           >
             <Link href="/admin/dashboard">
               <motion.div
-                className="dark:bg-gradient-to-br dark:from-blue-900/50 dark:to-purple-900/50 dark:backdrop-blur-lg dark:border dark:border-blue-500/30 bg-white border border-gray-200 shadow-sm rounded-2xl p-8 cursor-pointer overflow-hidden hover:shadow-[0_0_20px_#6366f166]"
+                className="dark:bg-gradient-to-br dark:from-blue-900/50 dark:to-purple-900/50 dark:backdrop-blur-lg dark:border dark:border-blue-500/30 bg-white/70 backdrop-blur-md border border-white/30 shadow-lg shadow-gray-200/70 rounded-2xl p-8 cursor-pointer overflow-hidden hover:shadow-xl hover:shadow-gray-300/50 hover:bg-white/80"
                 whileHover={{ scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 400 }}
               >
@@ -211,12 +214,12 @@ const MemoizedHeroSection = memo(({ onDemoMode, isDemoMode }: { onDemoMode: () =
                       </svg>
                     </div>
                   </motion.div>
-                  <h3 className="text-2xl font-bold dark:text-white text-gray-800 mb-4">Admin Portal</h3>
-                  <p className="dark:text-gray-300 text-gray-600 mb-6">
+                  <h3 className="text-2xl font-bold dark:text-white text-[#1a1a1a] mb-4">Admin Portal</h3>
+                  <p className="dark:text-gray-300 text-[#4b5563] mb-6">
                     Complete administration dashboard with analytics, workflow management, and system controls.
                   </p>
                   <motion.button
-                    className="w-full bg-gradient-to-r from-[#6366f1] to-[#3b82f6] text-white py-3 rounded-xl font-semibold shadow-[0_0_15px_#6366f166] hover:shadow-[0_0_25px_#6366f188]"
+                    className="w-full bg-gradient-to-r from-[#4f46e5] to-[#0ea5e9] text-white py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl ring-1 ring-white/20"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     style={{ willChange: 'transform' }}
@@ -239,7 +242,7 @@ const MemoizedHeroSection = memo(({ onDemoMode, isDemoMode }: { onDemoMode: () =
           >
             <Link href="/customer/dashboard">
               <motion.div
-                className="dark:bg-gradient-to-br dark:from-green-900/50 dark<｜tool▁sep｜>to-teal-900/50 dark:backdrop-blur-lg dark:border dark:border-green-500/30 bg-white border border-gray-200 shadow-sm rounded-2xl p-8 cursor-pointer overflow-hidden hover:shadow-[0_0_20px_#6366f166]"
+                className="dark:bg-gradient-to-br dark:from-green-900/50 dark:to-teal-900/50 dark:backdrop-blur-lg dark:border dark:border-green-500/30 bg-white/70 backdrop-blur-md border border-white/30 shadow-lg shadow-gray-200/70 rounded-2xl p-8 cursor-pointer overflow-hidden hover:shadow-xl hover:shadow-gray-300/50 hover:bg-white/80"
                 whileHover={{ scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 400 }}
               >
@@ -255,12 +258,12 @@ const MemoizedHeroSection = memo(({ onDemoMode, isDemoMode }: { onDemoMode: () =
                       </svg>
                     </div>
                   </motion.div>
-                  <h3 className="text-2xl font-bold dark:text-white text-gray-800 mb-4">Customer Portal</h3>
-                  <p className="dark:text-gray-300 text-gray-600 mb-6">
+                  <h3 className="text-2xl font-bold dark:text-white text-[#1a1a1a] mb-4">Customer Portal</h3>
+                  <p className="dark:text-gray-300 text-[#4b5563] mb-6">
                     Intuitive customer interface for submitting tickets, accessing knowledge base, and getting support.
                   </p>
                   <motion.button
-                    className="w-full bg-gradient-to-r from-[#6366f1] to-[#3b82f6] text-white py-3 rounded-xl font-semibold shadow-[0_0_15px_#6366f166] hover:shadow-[0_0_25px_#6366f188]"
+                    className="w-full bg-gradient-to-r from-[#4f46e5] to-[#0ea5e9] text-white py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl ring-1 ring-white/20"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     style={{ willChange: 'transform' }}
@@ -372,7 +375,7 @@ export function OptimizedWelcomePage() {
   }
 
   return (
-    <div className="min-h-screen dark:bg-gradient-to-br dark:from-slate-900 dark:via-purple-900 dark:to-slate-900 bg-gradient-to-b from-[#f9fafb] to-[#e5e7eb]">
+    <div className="min-h-screen dark:bg-gradient-to-br dark:from-slate-900 dark:via-purple-900 dark:to-slate-900 bg-gradient-to-b from-[#f9fafc] to-[#eef3ff]">
       {/* Morphing Navigation */}
       <MorphingNavigation isDemoMode={isDemoMode} onToggleDemo={() => setIsDemoMode(!isDemoMode)} />
       
@@ -383,9 +386,12 @@ export function OptimizedWelcomePage() {
       <MemoizedHeroSection onDemoMode={toggleDemoMode} isDemoMode={isDemoMode} />
       
       {/* Platform Service Showcase */}
-      <section className="py-20 dark:bg-gradient-to-r dark:from-slate-800 dark:to-gray-900 bg-gray-50 border-t border-gray-200 relative overflow-hidden">
+      <section className="py-20 dark:bg-gradient-to-r dark:from-slate-800 dark:to-gray-900 bg-gradient-to-b from-blue-50/30 to-indigo-50/50 relative overflow-hidden">
+        {/* Premium Glassmorphism Overlay */}
+        <div className="absolute inset-0 dark:hidden bg-gradient-to-br from-white/20 via-transparent to-blue-50/30 backdrop-blur-lg"></div>
+        
         {/* Light Mode Radial Lighting */}
-        <div className="absolute inset-0 dark:hidden bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.08),transparent_70%)]"></div>
+        <div className="absolute inset-0 dark:hidden bg-[radial-gradient(circle_at_center,rgba(79,70,229,0.12),transparent_70%)]"></div>
         
         {/* Dark Mode background pattern */}
         <div 
@@ -405,8 +411,8 @@ export function OptimizedWelcomePage() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-4xl font-bold dark:text-white text-gray-900 mb-4">Platform Service Showcase</h2>
-            <p className="dark:text-gray-400 text-gray-600 text-lg">Interactive tools and real-time metrics</p>
+            <h2 className="text-4xl font-bold dark:text-white text-[#1a1a1a] mb-4">Platform Service Showcase</h2>
+            <p className="dark:text-gray-400 text-[#4b5563] text-lg">Interactive tools and real-time metrics</p>
           </motion.div>
 
           {/* Service Cards */}
@@ -418,8 +424,8 @@ export function OptimizedWelcomePage() {
                 onClick={() => setSelectedFilter(filter)}
                 className={`px-5 py-2 rounded-full text-sm font-medium hover:shadow-lg hover:scale-105 transition-all duration-75 ${
                   selectedFilter === filter 
-                    ? 'bg-gradient-to-r from-[#6366f1] to-[#3b82f6] text-white shadow-[0_0_15px_#6366f166]' 
-                    : 'dark:bg-white/10 dark:backdrop-blur-lg dark:border dark:border-white/20 dark:text-gray-300 dark:hover:bg-white/20 bg-white border border-gray-300 text-gray-700 hover:border-gray-400'
+                    ? 'bg-gradient-to-r from-[#4f46e5] to-[#0ea5e9] text-white shadow-lg ring-1 ring-white/20' 
+                    : 'dark:bg-white/10 dark:backdrop-blur-lg dark:border dark:border-white/20 dark:text-gray-300 dark:hover:bg-white/20 bg-white/70 backdrop-blur-md border border-white/30 text-[#4b5563] hover:bg-white/90 hover:border-white/50 shadow-lg shadow-gray-200/50'
                 }`}
               >
                 {filter}
@@ -430,7 +436,7 @@ export function OptimizedWelcomePage() {
           {/* Service Cards Grid - Quick 3D Hover with Working Filter */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* Dashboard Overview Card */}
-            <div className="group dark:bg-white/5 dark:backdrop-blur-sm dark:border dark:border-white/10 bg-white border border-gray-200 shadow-sm rounded-2xl p-6 cursor-pointer transition-all duration-75 transform hover:scale-105 hover:-translate-y-1 hover:shadow-[0_0_20px_#6366f166] hover:border-gray-300">
+            <div className="group dark:bg-white/5 dark:backdrop-blur-sm dark:border dark:border-white/10 bg-white/70 backdrop-blur-md border border-white/30 shadow-lg shadow-gray-200/70 rounded-2xl p-6 cursor-pointer transition-all duration-75 transform hover:scale-105 hover:-translate-y-1 hover:shadow-xl hover:shadow-gray-300/50 hover:bg-white/80">
               <div className="flex justify-between items-start mb-4">
                 <span className="px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-medium rounded-full">Dashboard</span>
                 <span>❤️</span>
@@ -438,17 +444,17 @@ export function OptimizedWelcomePage() {
               <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-xl flex items-center justify-center">
                 <span>📊</span>
               </div>
-              <h3 className="text-xl font-semibold dark:text-white text-gray-800 mb-2">Dashboard Overview</h3>
-              <p className="dark:text-gray-400 text-gray-600 text-sm mb-4">Main dashboard showing real-time analytics and key metrics</p>
+              <h3 className="text-xl font-semibold dark:text-white text-[#1a1a1a] mb-2">Dashboard Overview</h3>
+              <p className="dark:text-gray-400 text-[#4b5563] text-sm mb-4">Main dashboard showing real-time analytics and key metrics</p>
               <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center space-x-3 dark:text-gray-400 text-gray-500 text-sm">
+                <div className="flex items-center space-x-3 dark:text-gray-400 text-[#6b7280] text-sm">
                   <span>❤️ 42</span>
                   <span>👁️ 128</span>
                 </div>
               </div>
               <button 
                 onClick={() => window.open('/admin/dashboard', '_blank')}
-                className="w-full bg-gradient-to-r from-[#6366f1] to-[#3b82f6] text-white py-2 rounded-lg text-sm font-medium shadow-[0_0_15px_#6366f166] hover:shadow-[0_0_25px_#6366f188] hover:scale-105 transition-all duration-75"
+                className="w-full bg-gradient-to-r from-[#4f46e5] to-[#0ea5e9] text-white py-2 rounded-lg text-sm font-medium shadow-lg hover:shadow-xl ring-1 ring-white/20 hover:scale-105 transition-all duration-75"
               >
                 View Details →
               </button>
@@ -602,7 +608,9 @@ export function OptimizedWelcomePage() {
       </section>
 
       {/* Data Visualization Section */}
-      <section className="py-20 dark:bg-gradient-to-br dark:from-slate-900 dark:via-purple-900 dark:to-slate-900 bg-gray-50 border-t border-gray-200">
+      <section className="py-20 dark:bg-gradient-to-br dark:from-slate-900 dark:via-purple-900 dark:to-slate-900 bg-gradient-to-b from-emerald-50/30 to-teal-50/50 relative">
+        {/* Premium Glassmorphism Overlay */}
+        <div className="absolute inset-0 dark:hidden bg-gradient-to-br from-white/20 via-transparent to-emerald-50/30 backdrop-blur-lg"></div>
         <div className="container mx-auto px-4">
           <motion.div
             className="text-center mb-16"
@@ -611,10 +619,10 @@ export function OptimizedWelcomePage() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-4xl md:text-6xl font-bold dark:text-white text-gray-900 mb-6">
-              Real-time <span className="bg-gradient-to-r from-[#6366f1] to-[#3b82f6] bg-clip-text text-transparent">Analytics</span>
+            <h2 className="text-4xl md:text-6xl font-bold dark:text-white text-[#1a1a1a] mb-6">
+              Real-time <span className="bg-gradient-to-r from-[#4f46e5] to-[#10b981] bg-clip-text text-transparent">Analytics</span>
             </h2>
-            <p className="text-xl dark:text-gray-300 text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl dark:text-gray-300 text-[#4b5563] max-w-3xl mx-auto">
               Advanced data visualization and performance metrics with interactive charts and live updates
             </p>
           </motion.div>
