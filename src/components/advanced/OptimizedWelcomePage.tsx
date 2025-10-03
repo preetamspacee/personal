@@ -275,202 +275,6 @@ const MemoizedHeroSection = memo(({ onDemoMode, isDemoMode }: { onDemoMode: () =
   </section>
 ))
 
-// Enhanced Platform Service Showcase with Working Buttons
-const MemoizedStatsSection = memo(() => (
-  <section className="py-20 bg-gradient-to-r from-slate-800 to-gray-900 relative overflow-hidden">
-    {/* Optimized background pattern */}
-    <div 
-      className="absolute inset-0 opacity-10"
-      style={{
-        backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
-        backgroundSize: '20px 20px',
-        willChange: 'transform'
-      }}
-    />
-    
-    <div className="container mx-auto px-4 relative z-10">
-      <motion.div
-        className="text-center mb-16"
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-      >
-        <h2 className="text-4xl font-bold text-white mb-4">Platform Service Showcase</h2>
-        <p className="text-gray-400 text-lg">Interactive tools and real-time metrics</p>
-      </motion.div>
-
-      {/* Interactive Service Buttons - Optimized */}
-      <div className="flex flex-wrap justify-center gap-4 mb-12">
-        {['Dashboard', 'Analytics', 'Tickets', 'Reports', 'Settings'].map((service, index) => (
-          <button
-            key={service}
-            className={`px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-150 ${
-              index === 0 
-                ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg shadow-blue-500/25' 
-                : 'bg-white/10 backdrop-blur-lg border border-white/20 text-gray-300 hover:bg-white/20 hover:scale-105'
-            }`}
-          >
-            {service}
-          </button>
-        ))}
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {/* Interactive Service Cards - Static */}
-        <div
-          className="bg-gradient-to-br from-blue-600/20 to-purple-600/20 backdrop-blur-lg border border-blue-500/30 rounded-2xl p-6 text-center cursor-pointer group hover:scale-105 hover:-translate-y-2 transition-all duration-200"
-        >
-          {/* Animated Chart */}
-          <div className="relative mb-4">
-            <div className="h-16 flex items-end justify-center space-x-2 mb-2">
-              {[65, 45, 80, 55, 90, 70, 85].map((height, index) => (
-                <motion.div
-                  key={index}
-                  className="bg-gradient-to-t from-blue-500 to-purple-400 rounded-t-md"
-                  style={{ width: '8px' }}
-                  initial={{ height: 0 }}
-                  animate={{ height: `${height}%` }}
-                  transition={{ duration: 0.8, delay: index * 0.1 }}
-                />
-              ))}
-            </div>
-            <div className="text-3xl font-bold text-blue-400 mb-2">1,247+</div>
-            <div className="text-gray-300">Active Tickets</div>
-          </div>
-          
-          <button
-            className="w-full bg-gradient-to-r from-blue-500/50 to-purple-500/50 hover:from-blue-500 hover:to-purple-500 text-white py-2 rounded-lg text-sm font-medium transition-all duration-150 hover:scale-105"
-          >
-            View Details →
-          </button>
-        </motion.div>
-
-        <div
-          className="bg-gradient-to-br from-green-600/20 to-teal-600/20 backdrop-blur-lg border border-green-500/30 rounded-2xl p-6 text-center cursor-pointer group hover:scale-105 hover:-translate-y-2 transition-all duration-200"
-        >
-          {/* Circular Progress Chart */}
-          <div className="relative mb-4">
-            <div className="w-16 h-16 mx-auto mb-3">
-              <svg className="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
-                <path
-                  className="text-green-600/30"
-                  strokeLinecap="round"
-                  strokeWidth="2"
-                  stroke="currentColor"
-                  d="M18 2.0845a 15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0 -31.831"
-                />
-                <motion.path
-                  className="text-green-400"
-                  strokeLinecap="round"
-                  strokeWidth="2"
-                  stroke="currentColor"
-                  d="M18 2.0845a 15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0 -31.831"
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: 0.942 }}
-                  transition={{ duration: 1.5, delay: 0.5 }}
-                />
-              </svg>
-              <div className="absolute inset-0 flex items-center justify-center text-green-400 font-bold text-sm">
-                94.2%
-              </div>
-            </div>
-            <div className="text-gray-300">Resolution Rate</div>
-          </div>
-          
-          <button
-            className="w-full bg-gradient-to-r from-green-500/50 to-teal-500/50 hover:from-green-500 hover:to-teal-500 text-white py-2 rounded-lg text-sm font-medium transition-all duration-150 hover:scale-105"
-          >
-            View Details →
-          </button>
-        </motion.div>
-
-        <div
-          className="bg-gradient-to-br from-purple-600/20 to-pink-600/20 backdrop-blur-lg border border-purple-500/30 rounded-2xl p-6 text-center cursor-pointer group hover:scale-105 hover:-translate-y-2 transition-all duration-200"
-        >
-          {/* Animated Line Chart */}
-          <div className="relative mb-4">
-            <div className="h-16 flex items-end justify-center mb-3">
-              <svg className="w-full h-full">
-                <motion.path
-                  d="M0,50 Q25,20 50,40 T100,30"
-                  stroke="url(#purpleGradient)"
-                  strokeWidth="3"
-                  fill="none"
-                  initial={{ pathLength: 0, opacity: 0 }}
-                  animate={{ pathLength: 1, opacity: 1 }}
-                  transition={{ duration: 1.5, delay: 0.3 }}
-                />
-                <defs>
-                  <linearGradient id="purpleGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#a855f7" />
-                    <stop offset="100%" stopColor="#ec4899" />
-                  </linearGradient>
-                </defs>
-              </svg>
-            </div>
-            <div className="text-3xl font-bold text-purple-400 mb-2">892</div>
-            <div className="text-gray-300">Knowledge Articles</div>
-          </div>
-          
-          <button
-            className="w-full bg-gradient-to-r from-purple-500/50 to-pink-500/50 hover:from-purple-500 hover:to-pink-500 text-white py-2 rounded-lg text-sm font-medium transition-all duration-150 hover:scale-105"
-          >
-            View Details →
-          </button>
-        </motion.div>
-
-        <div
-          className="bg-gradient-to-br from-orange-600/20 to-red-600/20 backdrop-blur-lg border border-orange-500/30 rounded-2xl p-6 text-center cursor-pointer group hover:scale-105 hover:-translate-y-2 transition-all duration-200"
-        >
-          {/* Pulse Animation */}
-          <div className="relative mb-4">
-            <motion.div
-              className="w-16 h-16 bg-gradient-to-br from-orange-400 to-red-500 rounded-full mx-auto mb-3 flex items-center justify-center"
-              animate={{ scale: [1, 1.2, 1], opacity: [1, 0.8, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
-              <span className="text-white text-xl">🔄</span>
-            </motion.div>
-            <div className="text-3xl font-bold text-orange-400 mb-2">24/7</div>
-            <div className="text-gray-300">Support Available</div>
-          </div>
-          
-          <button
-            className="w-full bg-gradient-to-r from-orange-500/50 to-red-500/50 hover:from-orange-500 hover:to-red-500 text-white py-2 rounded-lg text-sm font-medium transition-all duration-150 hover:scale-105"
-          >
-            View Details →
-          </button>
-        </motion.div>
-      </div>
-
-      {/* Quick Actions - Static */}
-      <div className="flex flex-wrap justify-center gap-4 mt-12">
-        <Link href="/admin/dashboard">
-          <button
-            className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-blue-500/25 hover:scale-105 transition-all duration-150"
-          >
-            🚀 Access Admin Dashboard
-          </button>
-        </Link>
-        <Link href="/customer/dashboard">
-          <button
-            className="px-6 py-3 bg-gradient-to-r from-green-500 to-teal-600 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-green-500/25 hover:scale-105 transition-all duration-150"
-          >
-            👥 Customer Portal
-          </button>
-        </Link>
-        <Link href="/auth/login">
-          <button
-            className="px-6 py-3 bg-white/10 backdrop-blur-lg border border-white/20 text-white rounded-lg font-semibold hover:bg-white/25 hover:scale-105 transition-all duration-150"
-          >
-            🔐 Login
-          </button>
-        </Link>
-      </div>
-    </div>
-  </section>
-))
 
 export function OptimizedWelcomePage() {
   const [isLoading, setIsLoading] = useState(true)
@@ -575,8 +379,89 @@ export function OptimizedWelcomePage() {
       {/* Main Landing Hero */}
       <MemoizedHeroSection onDemoMode={toggleDemoMode} isDemoMode={isDemoMode} />
       
-      {/* Platform Statistics */}
-      <MemoizedStatsSection />
+      {/* Platform Service Showcase */}
+      <section className="py-20 bg-gradient-to-r from-slate-800 to-gray-900 relative overflow-hidden">
+        {/* Optimized background pattern */}
+        <div 
+          className="absolute inset-0 opacity-10"
+          style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
+            backgroundSize: '20px 20px',
+            willChange: 'transform'
+          }}
+        />
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <h2 className="text-4xl font-bold text-white mb-4">Platform Service Showcase</h2>
+            <p className="text-gray-400 text-lg">Interactive tools and real-time metrics</p>
+          </motion.div>
+
+          {/* Service Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {/* Active Tickets Card */}
+            <div className="bg-gradient-to-br from-blue-600/20 to-purple-600/20 backdrop-blur-lg border border-blue-500/30 rounded-2xl p-6 text-center hover:scale-105 hover:-translate-y-2 transition-all duration-200">
+              <div className="text-3xl font-bold text-blue-400 mb-2">1,247+</div>
+              <div className="text-gray-300 mb-4">Active Tickets</div>
+              <button className="w-full bg-gradient-to-r from-blue-500/50 to-purple-500/50 hover:from-blue-500 hover:to-purple-500 text-white py-2 rounded-lg text-sm font-medium transition-all duration-150 hover:scale-105">
+                View Details →
+              </button>
+            </div>
+
+            {/* Resolution Rate Card */}
+            <div className="bg-gradient-to-br from-green-600/20 to-teal-600/20 backdrop-blur-lg border border-green-500/30 rounded-2xl p-6 text-center hover:scale-105 hover:-translate-y-2 transition-all duration-200">
+              <div className="text-3xl font-bold text-green-400 mb-2">94.2%</div>
+              <div className="text-gray-300 mb-4">Resolution Rate</div>
+              <button className="w-full bg-gradient-to-r from-green-500/50 to-teal-500/50 hover:from-green-500 hover:to-teal-500 text-white py-2 rounded-lg text-sm font-medium transition-all duration-150 hover:scale-105">
+                View Details →
+              </button>
+            </div>
+
+            {/* Knowledge Articles Card */}
+            <div className="bg-gradient-to-br from-purple-600/20 to-pink-600/20 backdrop-blur-lg border border-purple-500/30 rounded-2xl p-6 text-center hover:scale-105 hover:-translate-y-2 transition-all duration-200">
+              <div className="text-3xl font-bold text-purple-400 mb-2">892</div>
+              <div className="text-gray-300 mb-4">Knowledge Articles</div>
+              <button className="w-full bg-gradient-to-r from-purple-500/50 to-pink-500/50 hover:from-purple-500 hover:to-pink-500 text-white py-2 rounded-lg text-sm font-medium transition-all duration-150 hover:scale-105">
+                View Details →
+              </button>
+            </div>
+
+            {/* Support Card */}
+            <div className="bg-gradient-to-br from-orange-600/20 to-red-600/20 backdrop-blur-lg border border-orange-500/30 rounded-2xl p-6 text-center hover:scale-105 hover:-translate-y-2 transition-all duration-200">
+              <div className="text-3xl font-bold text-orange-400 mb-2">24/7</div>
+              <div className="text-gray-300 mb-4">Support Available</div>
+              <button className="w-full bg-gradient-to-r from-orange-500/50 to-red-500/50 hover:from-orange-500 hover:to-red-500 text-white py-2 rounded-lg text-sm font-medium transition-all duration-150 hover:scale-105">
+                View Details →
+              </button>
+            </div>
+          </div>
+
+          {/* Quick Actions */}
+          <div className="flex flex-wrap justify-center gap-4 mt-12">
+            <Link href="/admin/dashboard">
+              <button className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-blue-500/25 hover:scale-105 transition-all duration-150">
+                🚀 Access Admin Dashboard
+              </button>
+            </Link>
+            <Link href="/customer/dashboard">
+              <button className="px-6 py-3 bg-gradient-to-r from-green-500 to-teal-600 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-green-500/25 hover:scale-105 transition-all duration-150">
+                👥 Customer Portal
+              </button>
+            </Link>
+            <Link href="/auth/login">
+              <button className="px-6 py-3 bg-white/10 backdrop-blur-lg border border-white/20 text-white rounded-lg font-semibold hover:bg-white/25 hover:scale-105 transition-all duration-150">
+                🔐 Login
+              </button>
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* Data Visualization Section */}
       <section className="py-20 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
